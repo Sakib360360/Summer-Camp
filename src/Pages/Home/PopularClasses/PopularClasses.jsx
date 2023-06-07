@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import Card from '../../../Components/Card';
 import useClasses from '../../../Hooks/useClasses';
 
