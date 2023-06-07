@@ -1,19 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, NavLink, Outlet } from 'react-router-dom';
+import { AuthContext } from '../Providers/AuthProviders';
 
 const Dashboard = () => {
+    const {user} = useContext(AuthContext)
     const navItems = <>
         <li><NavLink to='/dashboard/studenthome'>Home</NavLink></li>
         <li><NavLink to='/dashboard/selectedClasses'>My Selected Classes</NavLink></li>
         <li><NavLink to='/dashboard/enrolledClasses'>My Enrolled Classes</NavLink></li>
-        <li><a>Navbar Item 2</a></li>
+        
     </>
     return (
         <div className="drawer">
             <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content flex flex-col">
                 {/* Navbar */}
-                <div className="w-full navbar bg-base-300">
+                <div className="w-full navbar bg-base-300 ">
                     <div className="flex-none lg:hidden">
                         <label htmlFor="my-drawer-3" className="btn btn-square btn-ghost">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-6 h-6 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
@@ -25,6 +27,9 @@ const Dashboard = () => {
                             {/* Navbar menu content here */}
                             {navItems}
                         </ul>
+                    </div>
+                    <div>
+                        {user?.displayName}
                     </div>
                 </div>
                 {/* Page content here */}

@@ -2,15 +2,19 @@ import React, { useContext, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useForm } from 'react-hook-form';
 import { FaEyeSlash, FaEye } from "react-icons/fa";
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Providers/AuthProviders';
+import Swal from 'sweetalert2';
 
 
 
 const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [error, setError] = useState('')
-    const {googleSignIn} = useContext(AuthContext)
+    const {googleSignIn,signInUser} = useContext(AuthContext)
+    const location = useLocation()
+    const navigate = useNavigate()
+    const from = location.state?.from?.pathname || '/'
     const [showPassword, setShowPassword] = useState(false);
     const handleTogglePassword = () => {
         setShowPassword(!showPassword);
@@ -26,12 +30,24 @@ const Login = () => {
     }
     const onSubmit = data => {
 
-        if (data.confirm_password !== data.password) {
-            setError('Confirm password is incorrect')
-        } else {
-            console.log(data)
-            
-        }
+        signInUser(data.email,data.password)
+        .then(result => {
+            const loggedUser = result.user;
+            console.log(loggedUser)
+            if(loggedUser){
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Logged in succesfully',
+                    showConfirmButton: false,
+                    timer: 1500
+                  })
+                  navigate(from, {replace:true})
+            }
+        })
+        .catch(error => {
+            setError(error)
+        })
 
     };
     return (

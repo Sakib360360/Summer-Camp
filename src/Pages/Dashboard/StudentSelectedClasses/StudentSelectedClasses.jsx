@@ -35,6 +35,7 @@ const StudentSelectedClasses = () => {
             }
           })
     }
+    console.log(selectedClasses)
     return (
         <div>
             {/* show all classes in table */}

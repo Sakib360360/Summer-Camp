@@ -11,6 +11,7 @@ const Card = ({item}) => {
         if(user?.email){
             const selectedClass = {
                 selectedClassId:item._id,
+                email:user?.email,
                 className,classImage,classInstructor,price,seats
             }
             // posting selected class in the server

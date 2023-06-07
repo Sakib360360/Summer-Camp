@@ -1,21 +1,53 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Providers/AuthProviders';
+import useAxios from '../../Hooks/useAxios';
+import Swal from 'sweetalert2';
 
 
 const Register = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { googleSignIn,createUser,updateUserProfile } = useContext(AuthContext)
+    const { googleSignIn, createUser, updateUserProfile } = useContext(AuthContext)
+    const navigate = useNavigate()
+    const { user } = useContext(AuthContext)
+    const [axiosInstance] = useAxios()
     const [error, setError] = useState('')
+    const [users, setUsers] = useState([])
+    useEffect(() => {
+        axiosInstance.get('/users')
+            .then(response => {
+                setUsers(response.data)
+            })
+    }, [])
+    console.log(users)
     const handleGoogleLogin = () => {
         googleSignIn()
             .then(result => {
                 const loggedUser = result.user;
+                const existingUser = users.some(user=>user.email === loggedUser?.email)
+                if (!existingUser) {
+                    const savedUser = {
+                        name: loggedUser.displayName,
+                        email: loggedUser.email,
+                        role: "admin",
+                        photo_url: loggedUser.photoURL
+
+                    }
+                    axiosInstance.post('/users', savedUser)
+                        .then(response => {
+                            if (response.data.insertedId) {
+                                Swal.fire('Added')
+
+                            }
+                        })
+                }
                 console.log(loggedUser)
+                console.log('existing ',existingUser)
 
             })
+        navigate('/')
     }
     const onSubmit = data => {
 
@@ -24,19 +56,35 @@ const Register = () => {
                 setError('Confirm password is incorrect')
             }
         } else {
-            createUser(data.email,data.password)
-            .then(result=>{
-                const loggedUser = result.user;
-                updateUserProfile(data.name,data.photo_url)
-                .then(()=>{
-                    const savedUserInfo = {
-                        name:data.name,
-                        photoURL:data.photo_url,
+            const savedUser = {
+                name: data.name,
+                email: data.email,
+                role: "student",
+                photo_url: data.photo_url
 
-                    }
+            }
+            createUser(data.email, data.password)
+
+                .then(result => {
+                    const loggedUser = result.user;
+                    axiosInstance.post('/users', savedUser)
+                        .then(response => {
+                            if (response.data.insertedId) {
+                                Swal.fire('Added')
+                            }
+                        })
+                    updateUserProfile(data.name, data.photo_url)
+                        .then(() => {
+
+                        })
+                        .catch(error => console.log(error))
+                    navigate('/')
                 })
-                .catch(error=>console.log(error))
-            })
+                .catch(error => {
+                    setError(error.message)
+                })
+
+            console.log(savedUser)
         }
 
     };
@@ -71,12 +119,12 @@ const Register = () => {
                                 </label>
                                 <input type="password" placeholder="password" {...register("password", {
                                     required: true,
-                                    
+
                                     minLength: 6,
                                     pattern: /(?=.*[!@#$%^&*])(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*]/
                                 })} className="input input-bordered" />
                                 {errors.password?.type === 'required' && <p className='text-red-600' role="alert">Password in required</p>}
-                               
+
                                 {errors.password?.type === 'minLength' && <p className='text-red-600' role="alert">Password must be greater than 6 charecters</p>}
                                 {errors.password?.type === 'pattern' && <p className='text-red-600' role="alert">Password must have  a special charecter, a capital letter</p>}
 
