@@ -1,19 +1,44 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
+import { AuthContext } from '../Providers/AuthProviders';
 
 
 const Register = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const [error,setError] = useState('')
+    const { googleSignIn,createUser,updateUserProfile } = useContext(AuthContext)
+    const [error, setError] = useState('')
+    const handleGoogleLogin = () => {
+        googleSignIn()
+            .then(result => {
+                const loggedUser = result.user;
+                console.log(loggedUser)
+
+            })
+    }
     const onSubmit = data => {
-        
-        if(data.confirm_password !== data.password){
-            setError('Confirm password is incorrect')
-        }else{
-            console.log(data)
+
+        if (data.confirm_password !== data.password) {
+            if (data.confirm_password) {
+                setError('Confirm password is incorrect')
+            }
+        } else {
+            createUser(data.email,data.password)
+            .then(result=>{
+                const loggedUser = result.user;
+                updateUserProfile(data.name,data.photo_url)
+                .then(()=>{
+                    const savedUserInfo = {
+                        name:data.name,
+                        photoURL:data.photo_url,
+
+                    }
+                })
+                .catch(error=>console.log(error))
+            })
         }
-        
+
     };
     return (
         <>
@@ -46,15 +71,15 @@ const Register = () => {
                                 </label>
                                 <input type="password" placeholder="password" {...register("password", {
                                     required: true,
-                                    maxLength: 14,
+                                    
                                     minLength: 6,
-                                    pattern: /(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]/
+                                    pattern: /(?=.*[!@#$%^&*])(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*]/
                                 })} className="input input-bordered" />
-                                {errors.password?.type === 'required' && <p className='text-red-600' role="alert">You must put password</p>}
-                                {errors.password?.type === 'maxLength' && <p className='text-red-600' role="alert">Password must be less than 14 charecters</p>}
-                                {errors.password?.type === 'minLength' && <p className='text-red-600' role="alert">Password must be greater than 5 charecters</p>}
-                                {errors.password?.type === 'pattern' && <p className='text-red-600' role="alert">Password must have at least a number , a special charecter, a small letter, a capital letter</p>}
-                                
+                                {errors.password?.type === 'required' && <p className='text-red-600' role="alert">Password in required</p>}
+                               
+                                {errors.password?.type === 'minLength' && <p className='text-red-600' role="alert">Password must be greater than 6 charecters</p>}
+                                {errors.password?.type === 'pattern' && <p className='text-red-600' role="alert">Password must have  a special charecter, a capital letter</p>}
+
                             </div>
                             <div className="form-control">
                                 <label className="label">
@@ -69,10 +94,19 @@ const Register = () => {
                                 </label>
                                 <input type="text" placeholder="Phoro URL" {...register("photo_url")} className="input input-bordered" />
                             </div>
+                            <div>
+                                <p>Already have an account? <Link to='/login' className='text-blue-400'>Login</Link></p>
+                            </div>
                             <div className="form-control mt-6">
                                 <button className="btn btn-primary">Register</button>
                             </div>
+
                         </form>
+                        <div className="card-body mt-[-40px]">
+                            <div className="divider">OR</div>
+                            <button onClick={handleGoogleLogin} className="btn btn-block">Google</button>
+                        </div>
+
                     </div>
                 </div>
 

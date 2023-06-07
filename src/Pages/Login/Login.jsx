@@ -1,23 +1,36 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useForm } from 'react-hook-form';
 import { FaEyeSlash, FaEye } from "react-icons/fa";
+import { Link } from 'react-router-dom';
+import { AuthContext } from '../Providers/AuthProviders';
 
 
 
 const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [error, setError] = useState('')
+    const {googleSignIn} = useContext(AuthContext)
     const [showPassword, setShowPassword] = useState(false);
     const handleTogglePassword = () => {
         setShowPassword(!showPassword);
     };
+
+    const handleGoogleLogin=()=>{
+        googleSignIn()
+        .then(result=>{
+            const loggedUser = result.user;
+            console.log(loggedUser)
+
+        })
+    }
     const onSubmit = data => {
 
         if (data.confirm_password !== data.password) {
             setError('Confirm password is incorrect')
         } else {
             console.log(data)
+            
         }
 
     };
@@ -53,10 +66,17 @@ const Login = () => {
                                 
                                 <p className='text-red-600'>{error}</p>
                             </div>
+                            <div>
+                                <p>Don't have an account? <Link to='/register' className='text-blue-400'>Sign up</Link></p>
+                            </div>
                             <div className="form-control mt-6">
                                 <button className="btn btn-primary">Login</button>
                             </div>
                         </form>
+                        <div className="card-body mt-[-40px]">
+                            <div className="divider">OR</div>
+                            <button onClick={handleGoogleLogin} className="btn btn-block">Google</button>
+                        </div>
                     </div>
                 </div>
 

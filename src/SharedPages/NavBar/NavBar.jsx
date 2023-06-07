@@ -1,15 +1,30 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link, NavLink } from 'react-router-dom';
+import { AuthContext } from '../../Pages/Providers/AuthProviders';
 
 const NavBar = () => {
+    const { user, logOut } = useContext(AuthContext)
+    const isAdmin = true
+
+    const handleSignOut = () => {
+        logOut()
+            .then(() => { })
+            .catch(error => console.log(error))
+    }
 
     const navItems = <>
-    <li><NavLink to='/'>Home</NavLink></li>
-    <li><NavLink to='/instructors'>Instructors</NavLink></li>
-    <li><NavLink to='/classes'>Classes</NavLink></li>
-    <li><NavLink to='/dashboard'>Dashboard</NavLink></li>
-    <li><NavLink to='/login'>Login</NavLink></li>
-    <li><NavLink to='/register'>Sign Up</NavLink></li>
+        <li><NavLink to='/'>Home</NavLink></li>
+        <li><NavLink to='/instructors'>Instructors</NavLink></li>
+        <li><NavLink to='/classes'>Classes</NavLink></li>
+        
+        {
+            isAdmin && <li><NavLink to='/dashboard'>Dashboard</NavLink></li>
+        }
+
+        {
+            user ? <li><Link onClick={handleSignOut}>Sign out</Link></li> : <><li><NavLink to='/login'>Login</NavLink></li>
+                <li><NavLink to='/register'>Sign Up</NavLink></li></>
+        }
     </>
     return (
         <div>
