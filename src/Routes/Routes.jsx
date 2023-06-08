@@ -12,6 +12,10 @@ import StudentHome from '../Pages/Dashboard/StudentHome/StudentHome';
 import StudentSelectedClasses from '../Pages/Dashboard/StudentSelectedClasses/StudentSelectedClasses';
 import StudentEnrolledClasses from '../Pages/Dashboard/StudentEnrolledClasses/StudentEnrolledClasses';
 import Payment from '../Pages/Dashboard/Payment/Payment';
+import InstructorHome from '../Pages/Dashboard/InstructorHome/InstructorHome';
+import InstructorRoutes from './instructorRoutes';
+import AddAClass from '../Pages/Dashboard/AddAClass/AddAClass';
+import MyClasses from '../Pages/Dashboard/MyClasses/MyClasses';
 
 const Routes = createBrowserRouter([
     {
@@ -60,15 +64,27 @@ const Routes = createBrowserRouter([
             {
                 path:'payment',
                 element:<Payment></Payment>
-            }
+            },
+            // instructor routes
+            {
+                path:'instructorHome',
+                element:<InstructorRoutes><InstructorHome></InstructorHome></InstructorRoutes>
+            },
+            {
+                path:'addAClass',
+                element:<InstructorRoutes><AddAClass></AddAClass></InstructorRoutes>
+            },
+            {
+                path:'myClasses',
+                element:<InstructorRoutes><MyClasses></MyClasses></InstructorRoutes>
+            },
 
 
-            //instructor routes
 
-
-            // admin routes
+            
         ]
-    }
+    },
+    
 ])
 
 export default Routes;

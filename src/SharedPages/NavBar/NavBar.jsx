@@ -16,9 +16,10 @@ const NavBar = () => {
         <li><NavLink to='/'>Home</NavLink></li>
         <li><NavLink to='/instructors'>Instructors</NavLink></li>
         <li><NavLink to='/classes'>Classes</NavLink></li>
+    
         
         {
-            isAdmin && <li><NavLink to='/dashboard'>Dashboard</NavLink></li>
+            user && <li><NavLink to='/dashboard'>Dashboard</NavLink></li>
         }
 
         {

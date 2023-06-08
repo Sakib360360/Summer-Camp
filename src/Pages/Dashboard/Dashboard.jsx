@@ -1,14 +1,28 @@
 import React, { useContext } from 'react';
 import { Link, NavLink, Outlet } from 'react-router-dom';
 import { AuthContext } from '../Providers/AuthProviders';
+import useInstructor from '../../Hooks/useInstructor';
 
 const Dashboard = () => {
-    const {user} = useContext(AuthContext)
+    const { user } = useContext(AuthContext)
+    const [isInstructor, isInstructorLoading] = useInstructor()
     const navItems = <>
-        <li><NavLink to='/dashboard/studenthome'>Home</NavLink></li>
-        <li><NavLink to='/dashboard/selectedClasses'>My Selected Classes</NavLink></li>
-        <li><NavLink to='/dashboard/enrolledClasses'>My Enrolled Classes</NavLink></li>
-        
+        {
+            isInstructor || <>
+                <li><NavLink to='/dashboard/studenthome'>Home</NavLink></li>
+                <li><NavLink to='/dashboard/selectedClasses'>My Selected Classes</NavLink></li>
+                <li><NavLink to='/dashboard/enrolledClasses'>My Enrolled Classes</NavLink></li>
+            </>
+        }
+        {
+            isInstructor && <>
+                <li><NavLink to='/dashboard/instructorHome'>Instructor Home</NavLink></li>
+                <li><NavLink to='/dashboard/addAClass'>Add a Class</NavLink></li>
+                <li><NavLink to='/dashboard/myClasses'>My Classes</NavLink></li>
+            </>
+        }
+
+
     </>
     return (
         <div className="drawer">
