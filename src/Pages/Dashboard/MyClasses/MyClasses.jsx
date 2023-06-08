@@ -6,6 +6,7 @@ const MyClasses = () => {
     const [axiosInstance] = useAxiosSecure()
     const [myClasses, setMyClasses] = useState([])
     const { user } = useContext(AuthContext)
+    const [feedback,setFeedback] = useState('')
 
 
 
@@ -16,8 +17,21 @@ const MyClasses = () => {
                 setMyClasses(response.data)
             })
     }, [])
+    const feedbackShow = (feedback)=>{
+        setFeedback(feedback)
+    }
     return (
         <div>
+            {/* modal show feedback */}
+            <div className="modal" id="my_modal_8">
+                <div className="modal-box">
+                    <h3 className="font-bold text-lg">Feedback from Admin</h3>
+                    <p className="py-4">{feedback}</p>
+                    <div className="modal-action">
+                        <a href="#" className="btn">Close</a>
+                    </div>
+                </div>
+            </div>
             {/* show all in table */}
             <div className="overflow-x-auto w-full">
                 <table className="table w-full">
@@ -63,7 +77,7 @@ const MyClasses = () => {
                                 <td>{item.enrolledStudent}</td>
                                 <td>{item.status}</td>
                                 {/* TODO: onclick show more */}
-                                <td>{item.feedback}</td>
+                                <td><button onClick={()=>feedbackShow(item.feedback)}><a href="#my_modal_8" className="btn">See Feedback</a></button></td>
                             </tr>)
                         }
 

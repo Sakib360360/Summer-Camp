@@ -19,16 +19,19 @@ const Dashboard = () => {
             </>
         }
         {
-            isAdmin ? <>
+            isAdmin && <>
                 <li><NavLink to='/dashboard/adminHome'>Admin Home</NavLink></li>
                 <li><NavLink to='/dashboard/manageClasses'>Manage Classes</NavLink></li>
-            </> : <>
-                <li><NavLink to='/dashboard/studenthome'>Home</NavLink></li>
-                <li><NavLink to='/dashboard/selectedClasses'>My Selected Classes</NavLink></li>
-                <li><NavLink to='/dashboard/enrolledClasses'>My Enrolled Classes</NavLink></li>
-            </>
+            </> 
         }
-
+        {
+            !isAdmin && !isInstructor ? <>
+            <li><NavLink to='/dashboard/studenthome'>Home</NavLink></li>
+            <li><NavLink to='/dashboard/selectedClasses'>My Selected Classes</NavLink></li>
+            <li><NavLink to='/dashboard/enrolledClasses'>My Enrolled Classes</NavLink></li>
+        </> : null
+        }
+            
 
 
     </>

@@ -1,48 +1,66 @@
 import React, { useEffect, useState } from 'react';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
+import useManageClasses from '../../../Hooks/useManageClasses';
 
 const ManageClasses = () => {
-    const [status,setStatus] = useState('pending')
-
+    const [status, setStatus] = useState('pending')
     const [axiosInstance] = useAxiosSecure()
-    const [allClasses, setAllClasses] = useState([])
-    useEffect(() => {
-        axiosInstance.get('/allClasses')
-            .then(response => {
-                setAllClasses(response.data)
-            })
-    }, [])
+    const [allClasses, refetch] = useManageClasses()
+    const [textareaValue, setTextareaValue] = useState('');
+    const [sendItem,setSendItem] = useState({})
 
 
     // handle approve
-    const handleApprove =(item)=>{
+    const handleApprove = (item) => {
         console.log(item)
         const status = 'approved'
-        axiosInstance.put(`/updateStatus/${item._id}`,{status} )
-        .then(response=>{
-            if(response.data.modifiedCount){
-                Swal.fire('Approved')
-                setStatus('approved')
-            }
-        })
-        .catch(error=>console.log(error))
+        axiosInstance.put(`/updateStatus/${item._id}`, { status })
+            .then(response => {
+                if (response.data.modifiedCount) {
+                    Swal.fire('Approved')
+                    setStatus('approved')
+                    refetch()
+                }
+            })
+            .catch(error => console.log(error))
     }
     // handle deny
-    const handleDeny = (item)=>{
+    const handleDeny = (item) => {
         const status = 'deny'
-        axiosInstance.put(`/updateStatus/${item._id}`,{status} )
-        .then(response=>{
-            if(response.data.modifiedCount){
-                Swal.fire('Denied')
-                setStatus('denied')
+        axiosInstance.put(`/updateStatus/${item._id}`, { status })
+            .then(response => {
+                if (response.data.modifiedCount) {
+                    Swal.fire('Denied')
+                    setStatus('denied')
+                    refetch()
+                }
+            })
+            .catch(error => console.log(error))
+    }
+    // handle feedback
+    const handleSendFeedback = (item)=>{
+        setSendItem(item)
+    }
+    const handleFeedback = () => {
+        const feedback =textareaValue;
+        axiosInstance.put(`/sendFeedback/${sendItem._id}`,{feedback})
+        .then(response => {
+            if (response.data.modifiedCount>0) {
+
+                Swal.fire('Sent')
+                refetch()
             }
         })
-        .catch(error=>console.log(error))
+        .catch(error => console.log(error))
+
+
     }
-    console.log(allClasses)
+
+
     return (
         <div>
+
             {/* show all in table */}
             <div className="overflow-x-auto w-full">
                 <table className="table w-full">
@@ -89,10 +107,23 @@ const ManageClasses = () => {
                                 <td>{item.seats}</td>
                                 <td>{item.enrolledStudent}</td>
                                 <td>{item.status}</td>
-                                <td><button disabled={item.status === 'pending'? false : true} onClick={()=>handleApprove(item)} className='btn btn-success btn-sm'>Approve</button></td>
-                                <td><button disabled={item.status === 'pending'? false : true} onClick={()=>handleDeny(item)} className='btn btn-sm btn-error'>Deny</button></td>
+                                <td><button disabled={item.status === 'pending' ? false : true} onClick={() => handleApprove(item)} className='btn btn-success btn-sm'>Approve</button></td>
+                                <td><button disabled={item.status === 'pending' ? false : true} onClick={() => handleDeny(item)} className='btn btn-sm btn-error'>Deny</button></td>
                                 {/* TODO: onclick show more */}
-                                <td><button  className='btn btn-sm'>Send Feedback</button></td>
+                                <>
+                                    <div className="modal" id="my_modal_8">
+                                        <div className="modal-box">
+                                            <h3 className="font-bold text-lg">Send feedback !</h3>
+
+                                            <textarea onChange={(e) => setTextareaValue(e.target.value)} className='border-black border' name="feedback" id="" cols="60" rows="5"></textarea>
+                                            <div className="modal-action">
+                                                <button onClick={handleFeedback} className=""><a href="#" className="btn">Send</a></button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </>
+                                <td><button onClick={()=>handleSendFeedback(item)} className=''><a href="#my_modal_8" className="btn">Send Feedback</a></button></td>
                             </tr>)
                         }
 
@@ -103,6 +134,7 @@ const ManageClasses = () => {
 
                 </table>
             </div>
+
         </div>
     );
 };
