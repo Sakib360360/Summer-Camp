@@ -1,11 +1,38 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../../Providers/AuthProviders';
 import useManageUsers from '../../../Hooks/useManageUsers';
+import useAxiosSecure from '../../../Hooks/useAxiosSecure';
+import Swal from 'sweetalert2';
 
 const ManageUsers = () => {
     const { user } = useContext(AuthContext)
     const [manageAllUsers, isManageUsersLoading, refetch] = useManageUsers()
+    const [axiosInstance] = useAxiosSecure()
     console.log(manageAllUsers)
+    const makeInstructor=(item)=>{
+        const role = 'instructor'
+        axiosInstance.put(`/manageUsers/${item._id}`,{role})
+        .then(response=>{
+            if(response.data.modifiedCount>0){
+                Swal.fire(`${item.name} is instructor now.`)
+                refetch()
+            }
+        })
+        .catch(error=>console.log(error))
+    }
+    // TODO:disable fucnt
+    const makeAdmin=(item)=>{
+        const role = 'admin'
+        axiosInstance.put(`/manageUsers/${item._id}`,{role})
+        .then(response=>{
+            if(response.data.modifiedCount>0){
+                Swal.fire(`${item.name} is Admin now.`)
+                
+                refetch()
+            }
+        })
+        .catch(error=>console.log(error))
+    }
     return (
         <div>
             <div className="overflow-x-auto w-full">
@@ -38,8 +65,8 @@ const ManageUsers = () => {
                                 <td>{item.email}</td>
                                 <td>{item.role || 'student'}</td>
                                 
-                                <td><button   className='btn btn-success btn-sm'>Instructor</button></td>
-                                <td><button   className='btn btn-sm btn-error'>Admin</button></td>
+                                <td><button onClick={()=>makeInstructor(item)} className='btn btn-success btn-sm'>Instructor</button></td>
+                                <td><button  onClick={()=>makeAdmin(item)} className='btn btn-sm btn-error'>Admin</button></td>
                                 
                             </tr>)
                         }

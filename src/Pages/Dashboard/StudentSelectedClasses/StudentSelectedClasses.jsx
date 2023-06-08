@@ -1,39 +1,44 @@
-import React, { useEffect, useState } from 'react';
-import { FaTrashAlt,FaAmazonPay } from 'react-icons/fa';
+import React, { useContext, useEffect, useState } from 'react';
+import { FaTrashAlt, FaAmazonPay } from 'react-icons/fa';
 import useSelectedClasses from '../../../Hooks/useSelectedClasses';
 import Swal from 'sweetalert2';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../Providers/AuthProviders';
 
 const StudentSelectedClasses = () => {
-    const [selectedClasses,refetch] = useSelectedClasses()
+    const [selectedClasses, refetch] = useSelectedClasses()
+    const {setPaymentItem} = useContext(AuthContext)
     const [axiosInstance] = useAxiosSecure()
-    const handleDelete =(id)=>{
+    const paymentItemPass =(item)=>{
+        setPaymentItem(item)
+    }
+    const handleDelete = (id) => {
         Swal.fire({
             title: 'Do you want to delete?',
-            icon:'warning',
+            icon: 'warning',
             showDenyButton: true,
             showCancelButton: true,
             confirmButtonText: 'Yes',
             denyButtonText: `No`,
-          }).then((result) => {
+        }).then((result) => {
 
             if (result.isConfirmed) {
-              axiosInstance.delete(`/selectedClasses/${id}`)
-              .then(response=>{
-                console.log(response)
-                if(response.data.deletedCount>0){
-                    refetch()
-                    Swal.fire('Deleted successfully')
-                }
-              })
-                
-              }
+                axiosInstance.delete(`/selectedClasses/${id}`)
+                    .then(response => {
+                        console.log(response)
+                        if (response.data.deletedCount > 0) {
+                            refetch()
+                            Swal.fire('Deleted successfully')
+                        }
+                    })
 
-             else if (result.isDenied) {
-              Swal.fire('Not deleted')
             }
-          })
+
+            else if (result.isDenied) {
+                Swal.fire('Not deleted')
+            }
+        })
     }
     console.log(selectedClasses)
     return (
@@ -59,7 +64,7 @@ const StudentSelectedClasses = () => {
                         </thead>
                         <tbody>
                             {
-                                selectedClasses.map((item,index) => <tr key={item._id}>
+                                selectedClasses.map((item, index) => <tr key={item._id}>
                                     <td>
                                         {index + 1}
                                     </td>
@@ -84,12 +89,12 @@ const StudentSelectedClasses = () => {
                                     <td>
                                         <button onClick={() => handleDelete(item._id)}><FaTrashAlt></FaTrashAlt></button>
                                     </td>
-                                    <td><Link to='../payment'><button><FaAmazonPay></FaAmazonPay></button></Link></td>
+                                    <td><Link to='../payment'><button onClick={()=>paymentItemPass(item)}><FaAmazonPay></FaAmazonPay></button></Link></td>
                                 </tr>)
                             }
-                           
 
 
+                            {/*  */}
                         </tbody>
 
 

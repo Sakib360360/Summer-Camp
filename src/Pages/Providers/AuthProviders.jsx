@@ -12,6 +12,7 @@ const AuthProviders = ({children}) => {
     const [axiosInstance] = useAxios()
     const [loading,setLoading] = useState(true)
     const [user,setUser] = useState(null)
+    const [paymentItem,setPaymentItem] = useState({})
     const googleProvider = new GoogleAuthProvider()
 
     const createUser = (email,password)=>{
@@ -70,7 +71,9 @@ const AuthProviders = ({children}) => {
         googleSignIn,
         signInUser,
         updateUserProfile,
-        loading
+        loading,
+        setPaymentItem,
+        paymentItem
 
     }
    
