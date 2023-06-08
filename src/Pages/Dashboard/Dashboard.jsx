@@ -2,18 +2,15 @@ import React, { useContext } from 'react';
 import { Link, NavLink, Outlet } from 'react-router-dom';
 import { AuthContext } from '../Providers/AuthProviders';
 import useInstructor from '../../Hooks/useInstructor';
+import useAdmin from '../../Hooks/useAdmin';
 
 const Dashboard = () => {
     const { user } = useContext(AuthContext)
     const [isInstructor, isInstructorLoading] = useInstructor()
+    const [isAdmin, isAdminLoading] = useAdmin()
+    console.log('isAdmin',isAdmin)
     const navItems = <>
-        {
-            isInstructor || <>
-                <li><NavLink to='/dashboard/studenthome'>Home</NavLink></li>
-                <li><NavLink to='/dashboard/selectedClasses'>My Selected Classes</NavLink></li>
-                <li><NavLink to='/dashboard/enrolledClasses'>My Enrolled Classes</NavLink></li>
-            </>
-        }
+
         {
             isInstructor && <>
                 <li><NavLink to='/dashboard/instructorHome'>Instructor Home</NavLink></li>
@@ -21,6 +18,17 @@ const Dashboard = () => {
                 <li><NavLink to='/dashboard/myClasses'>My Classes</NavLink></li>
             </>
         }
+        {
+            isAdmin ? <>
+                <li><NavLink to='/dashboard/adminHome'>Admin Home</NavLink></li>
+                <li><NavLink to='/dashboard/manageClasses'>Manage Classes</NavLink></li>
+            </> : <>
+                <li><NavLink to='/dashboard/studenthome'>Home</NavLink></li>
+                <li><NavLink to='/dashboard/selectedClasses'>My Selected Classes</NavLink></li>
+                <li><NavLink to='/dashboard/enrolledClasses'>My Enrolled Classes</NavLink></li>
+            </>
+        }
+
 
 
     </>

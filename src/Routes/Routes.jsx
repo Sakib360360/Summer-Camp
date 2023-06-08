@@ -16,6 +16,9 @@ import InstructorHome from '../Pages/Dashboard/InstructorHome/InstructorHome';
 import InstructorRoutes from './instructorRoutes';
 import AddAClass from '../Pages/Dashboard/AddAClass/AddAClass';
 import MyClasses from '../Pages/Dashboard/MyClasses/MyClasses';
+import AdminRoutes from './AdminRoutes';
+import AdminHome from '../Pages/Dashboard/AdminHome/AdminHome';
+import ManageClasses from '../Pages/Dashboard/ManageClasses/ManageClasses';
 
 const Routes = createBrowserRouter([
     {
@@ -78,6 +81,15 @@ const Routes = createBrowserRouter([
                 path:'myClasses',
                 element:<InstructorRoutes><MyClasses></MyClasses></InstructorRoutes>
             },
+            // admin routes
+            {
+                path:'adminHome',
+                element:<AdminRoutes><AdminHome></AdminHome></AdminRoutes>
+            },
+            {
+                path:'manageClasses',
+                element:<AdminRoutes><ManageClasses></ManageClasses></AdminRoutes>
+            }
 
 
 
