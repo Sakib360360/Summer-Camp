@@ -21,11 +21,13 @@ import AdminHome from '../Pages/Dashboard/AdminHome/AdminHome';
 import ManageClasses from '../Pages/Dashboard/ManageClasses/ManageClasses';
 import ManageUsers from '../Pages/Dashboard/ManageUsers/ManageUsers';
 import StudentPaymentHistory from '../Pages/Dashboard/StudentPaymentHistoy/StudentPaymentHistory';
+import ErrorPage from '../Pages/ErrorPage/ErrorPage';
 
 const Routes = createBrowserRouter([
     {
         path:'/',
         element:<Main></Main>,
+        errorElement:<ErrorPage></ErrorPage>,
         children:[
             {
                 path:'/',
@@ -52,6 +54,7 @@ const Routes = createBrowserRouter([
     {
         path:'dashboard',
         element:<PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
+        errorElement:<ErrorPage></ErrorPage>,
         children:[
             //student routes
             {

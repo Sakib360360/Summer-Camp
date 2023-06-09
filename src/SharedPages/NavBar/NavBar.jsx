@@ -16,8 +16,8 @@ const NavBar = () => {
         <li><NavLink to='/'>Home</NavLink></li>
         <li><NavLink to='/instructors'>Instructors</NavLink></li>
         <li><NavLink to='/classes'>Classes</NavLink></li>
-    
-        
+
+
         {
             user && <li><NavLink to='/dashboard'>Dashboard</NavLink></li>
         }
@@ -47,9 +47,14 @@ const NavBar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    {/* {
-                        user && <button onClick={handleLogout} className='btn btn-outline text-white'>Logout</button>
-                    } */}
+                    {
+                        user?.photoURL && <label className="btn hidden md:block btn-ghost btn-circle avatar">
+                            <div className="w-10 rounded-full">
+                                <img src={user?.photoURL} />
+                            </div>
+                        </label>
+                    }
+
                 </div>
             </div>
         </div>
