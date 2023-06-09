@@ -1,58 +1,65 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
-import React, { useContext, useEffect, useState } from 'react';
-import { AuthContext } from '../../Providers/AuthProviders';
+import React from 'react';
+import { useEffect } from 'react';
+
+import { useState } from 'react';
+import { useContext } from 'react';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
+import { AuthContext } from '../../Providers/AuthProviders';
+import Swal from 'sweetalert2';
 
 const CheckOut = () => {
-    const { paymentItem } = useContext(AuthContext)
-    console.log(paymentItem)
-    const [axiosInstance] = useAxiosSecure()
-    const user = useContext(AuthContext)
-    const [process,setProcess] = useState(false)
-    const [transactionId,setTransactioId] = useState('')
-    const [clientSecret, setClientSecret] = useState("");
     const stripe = useStripe()
-    const [error, setError] = useState(null)
+    const { paymentItem } = useContext(AuthContext)
+    const [process, setProcess] = useState(false)
     const [success, setSuccess] = useState('')
-    const elements = useElements()
-
+    const [transactionId, setTransactioId] = useState('')
+    const [error, setError] = useState(null)
+    const elements = useElements('')
+    const { user } = useContext(AuthContext)
+    const [clientSecret, setClientSecret] = useState("");
+    const [axiosInstance] = useAxiosSecure()
+    const [availableSeats, setAvailableSeats] = useState(paymentItem.seats)
+    const updatedSeats = availableSeats - 1;
     const price = paymentItem.price
-    // console.log(price)
+
+    const date = new Date()
+    const enrolledItem = {...paymentItem,transactionId,date};
 
 
+    console.log(enrolledItem)
 
     useEffect(() => {
-        axiosInstance.post('/payment-intent', { price })
-            .then(response => {
-                setClientSecret(response.data.clientSecret)
-                console.log(clientSecret)
+        axiosInstance.post('/create-payment-intent', { price })
+            .then(res => {
+                setClientSecret(res.data.clientSecret)
             })
-    }, [price,axiosInstance])
+    }, [price, axiosInstance])
 
-    const handleSubmit = async (e) => {
-        e.preventDefault()
 
+
+
+    const handleSubmit = async (events) => {
+        events.preventDefault()
         if (!stripe || !elements) {
             return
         }
-
-        const card = elements.getElement(CardElement)
-        if (card === null) {
+        const card = elements.getElement(CardElement);
+        if (card == null) {
             return
         }
-
-
+        // console.log(card)
         const { error, paymentMethod } = await stripe.createPaymentMethod({
             type: 'card',
             card,
         });
         if (error) {
-            console.log(error);
+            console.log('[error]', error);
             setError(error)
         } else {
-            setError('')
-            console.log('PaymentMethod', paymentMethod);
+            console.log('[PaymentMethod]', paymentMethod);
         }
+
 
         setProcess(true)
         const { paymentIntent, confirmError } = await stripe.confirmCardPayment(
@@ -70,27 +77,78 @@ const CheckOut = () => {
 
             },
         );
-        if(confirmError){
+        if (confirmError) {
             console.log(confirmError)
             setError(confirmError)
-          }
-          setProcess(false)
-          if(paymentIntent.status === 'succeeded'){
-            
+        }
+        setProcess(false)
+        if (paymentIntent.status === 'succeeded') {
+
             const transactionId = paymentIntent.id;
-            setTransactioId(transactionIdg)
-            if(transactionId){
+            
+            if (transactionId) {
+                setTransactioId(transactionId)
                 setSuccess('Done,', transactionId)
+                const payment = {
+                    payer: user?.email,
+                    transactionId,
+                    price,
+
+                }
+                // update availble seats
+
+                axiosInstance.patch(`/updateAvailableSeats/${paymentItem.selectedClassId}`, { updatedSeats })
+                    .then(response => {
+                        if (response.data.modifiedCount) {
+                            setAvailableSeats(availableSeats - 1)
+                            Swal.fire('You perchaced a Seat')
+                        }
+                        console.log(response.data)
+                    })
+                    .catch(error => console.log(error))
+
+                // from selected classes updating seats
+
+
+                axiosInstance.patch(`/updateSelectedClasses/${paymentItem._id}`, { updatedSeats })
+                    .then(response => {
+
+                        console.log(response.data)
+                    })
+                    .catch(error => console.log(error))
+
+
+                // from selected classes remove item
+                axiosInstance.delete(`/deleteSelectedClass/${paymentItem._id}`)
+                    .then(response => {
+                        console.log(response.data)
+                    })
+                    .catch(error => console.log(error))
+
+                // add this to enrolled classes
+
+                axiosInstance.post('/enrolledClasses', {enrolledItem})
+                    .then(response => {
+                        console.log(response.data)
+                    })
+                    .catch(error => console.log(error))
+
+
+
+
+
+
+
+                console.log(transactionId)
+                Swal.fire('Payment Complete')
             }
 
-          }
+        }
+    };
 
-
-    }
     return (
         <div>
             <form onSubmit={handleSubmit}>
-
                 <CardElement
                     options={{
                         style: {
@@ -107,12 +165,12 @@ const CheckOut = () => {
                         },
                     }}
                 />
-                <button className='btn btn-sm btn-primary' type="submit" >
+                <button disabled={!stripe || !clientSecret || process} type="submit" className='btn btn-sm mt-4' >
                     Pay
                 </button>
             </form>
-            <p>{error ? <><p className='text-red-500'>{error.message}</p></> : <></>}</p>
-            <p>{success ? <><p className='text-green-700'>{success}</p></> : <></>}</p>
+            <div>{error ? <><p className='text-red-500'>{error.message}</p></> : <></>}</div>
+            <div>{success ? <><p className='text-green-700'>{success}</p></> : <></>}</div>
         </div>
     );
 };

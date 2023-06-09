@@ -20,6 +20,7 @@ import AdminRoutes from './AdminRoutes';
 import AdminHome from '../Pages/Dashboard/AdminHome/AdminHome';
 import ManageClasses from '../Pages/Dashboard/ManageClasses/ManageClasses';
 import ManageUsers from '../Pages/Dashboard/ManageUsers/ManageUsers';
+import StudentPaymentHistory from '../Pages/Dashboard/StudentPaymentHistoy/StudentPaymentHistory';
 
 const Routes = createBrowserRouter([
     {
@@ -68,6 +69,10 @@ const Routes = createBrowserRouter([
             {
                 path:'payment',
                 element:<Payment></Payment>
+            },
+            {
+                path:'paymentHistory',
+                element:<StudentPaymentHistory></StudentPaymentHistory>
             },
             // instructor routes
             {

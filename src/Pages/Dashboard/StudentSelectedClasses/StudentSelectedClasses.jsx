@@ -26,7 +26,7 @@ const StudentSelectedClasses = () => {
             if (result.isConfirmed) {
                 axiosInstance.delete(`/selectedClasses/${id}`)
                     .then(response => {
-                        console.log(response)
+                        // console.log(response)
                         if (response.data.deletedCount > 0) {
                             refetch()
                             Swal.fire('Deleted successfully')
@@ -40,7 +40,7 @@ const StudentSelectedClasses = () => {
             }
         })
     }
-    console.log(selectedClasses)
+    // console.log(selectedClasses)
     return (
         <div>
             {/* show all classes in table */}

@@ -1,12 +1,19 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { AuthContext } from '../Pages/Providers/AuthProviders';
 import useAxiosSecure from '../Hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
+import useAdmin from '../Hooks/useAdmin';
+import useInstructor from '../Hooks/useInstructor';
 
 const Card = ({item}) => {
     const {className,seats,classImage,price,classInstructor} = item;
+    const [isAdmin,] = useAdmin()
+    const [isInstructor,] = useInstructor()
     const {user} = useContext(AuthContext)
     const [axiosInstance] = useAxiosSecure()
+    const [disabled,setDisabled] = useState(false)
+
+    
     const handleSelect =(item)=>{
         if(user?.email){
             const selectedClass = {
@@ -32,7 +39,7 @@ const Card = ({item}) => {
                 <p>Seats:{seats}</p>
                 <p>Price:{price}</p>
                 <div className="card-actions justify-end">
-                    <button onClick={()=>handleSelect(item)} className="btn btn-primary">Select</button>
+                    <button disabled={isAdmin || isInstructor || item.seats<1 ? true : false} onClick={()=>handleSelect(item)} className="btn btn-primary">Select</button>
                 </div>
             </div>
         </div>

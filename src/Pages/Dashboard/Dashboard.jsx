@@ -3,12 +3,13 @@ import { Link, NavLink, Outlet } from 'react-router-dom';
 import { AuthContext } from '../Providers/AuthProviders';
 import useInstructor from '../../Hooks/useInstructor';
 import useAdmin from '../../Hooks/useAdmin';
+import Footer from '../../SharedPages/Footer/Footer';
 
 const Dashboard = () => {
     const { user } = useContext(AuthContext)
     const [isInstructor, isInstructorLoading] = useInstructor()
     const [isAdmin, isAdminLoading] = useAdmin()
-    console.log('isAdmin',isAdmin)
+    // console.log('isAdmin',isAdmin)
     const navItems = <>
 
         {
@@ -30,6 +31,7 @@ const Dashboard = () => {
             <li><NavLink to='/dashboard/studenthome'>Home</NavLink></li>
             <li><NavLink to='/dashboard/selectedClasses'>My Selected Classes</NavLink></li>
             <li><NavLink to='/dashboard/enrolledClasses'>My Enrolled Classes</NavLink></li>
+            <li><NavLink to='/dashboard/paymentHistory'>My Pyament History</NavLink></li>
         </> : null
         }
             
@@ -60,6 +62,7 @@ const Dashboard = () => {
                 </div>
                 {/* Page content here */}
                 <Outlet></Outlet>
+                <Footer></Footer>
             </div>
             <div className="drawer-side">
                 <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
