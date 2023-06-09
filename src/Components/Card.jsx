@@ -1,16 +1,16 @@
 import React, { useContext, useState } from 'react';
 import { AuthContext } from '../Pages/Providers/AuthProviders';
-import useAxiosSecure from '../Hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
 import useAdmin from '../Hooks/useAdmin';
 import useInstructor from '../Hooks/useInstructor';
+import useAxios from '../Hooks/useAxios';
 
 const Card = ({item}) => {
     const {className,seats,classImage,price,classInstructor} = item;
     const [isAdmin,] = useAdmin()
     const [isInstructor,] = useInstructor()
     const {user} = useContext(AuthContext)
-    const [axiosInstance] = useAxiosSecure()
+    const [axiosInstance] = useAxios()
     const [disabled,setDisabled] = useState(false)
 
     
@@ -31,7 +31,7 @@ const Card = ({item}) => {
         }
     }
     return (
-        <div className="card w-80 bg-base-100">
+        <div className={`card w-80 bg-base-100 ${item.seats <1 && 'bg-red-200'}`}>
             <figure><img className="" src={classImage} alt="Shoes" /></figure>
             <div className="card-body">
                 <h2 className="card-title">{className}</h2>

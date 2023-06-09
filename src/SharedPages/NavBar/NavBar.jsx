@@ -1,10 +1,25 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { AuthContext } from '../../Pages/Providers/AuthProviders';
 
 const NavBar = () => {
     const { user, logOut } = useContext(AuthContext)
-    const isAdmin = true
+    const [isDarkMode, setIsDarkMode] = useState(true);
+    useEffect(() => {
+        const htmlElement = document.querySelector('html');
+        
+        if (isDarkMode) {
+          htmlElement.classList.add('dark');
+          document.querySelector("html").setAttribute("data-theme","light")
+        } else {
+          htmlElement.classList.remove('dark');
+          document.querySelector("html").setAttribute("data-theme","dark")
+        }
+      }, [isDarkMode]);
+
+      const toggleDarkMode = () => {
+        setIsDarkMode(!isDarkMode);
+      };
 
     const handleSignOut = () => {
         logOut()
@@ -17,15 +32,10 @@ const NavBar = () => {
         <li><NavLink to='/instructors'>Instructors</NavLink></li>
         <li><NavLink to='/classes'>Classes</NavLink></li>
 
-
         {
             user && <li><NavLink to='/dashboard'>Dashboard</NavLink></li>
         }
 
-        {
-            user ? <li><Link onClick={handleSignOut}>Sign out</Link></li> : <><li><NavLink to='/login'>Login</NavLink></li>
-                <li><NavLink to='/register'>Sign Up</NavLink></li></>
-        }
     </>
     return (
         <div>
@@ -47,6 +57,17 @@ const NavBar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
+                    {
+                        <button className='mr-8' onClick={toggleDarkMode}>
+                        {isDarkMode ? 'Light Mode' : 'Dark Mode'}
+                      </button>
+                    }
+
+
+                    {
+                        user ? <p className='mr-6'><Link onClick={handleSignOut}>Sign out</Link></p> : <><li><NavLink to='/login'>Login</NavLink></li>
+                            <li><NavLink to='/register'>Sign Up</NavLink></li></>
+                    }
                     {
                         user?.photoURL && <label className="btn hidden md:block btn-ghost btn-circle avatar">
                             <div className="w-10 rounded-full">

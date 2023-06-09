@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../Providers/AuthProviders';
 import useManageUsers from '../../../Hooks/useManageUsers';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
@@ -8,6 +8,8 @@ const ManageUsers = () => {
     const { user } = useContext(AuthContext)
     const [manageAllUsers, isManageUsersLoading, refetch] = useManageUsers()
     const [axiosInstance] = useAxiosSecure()
+    const [disableInstructor,setDisableInstructor] = useState('')
+    const [disableAdmin,setDisableAdmin] = useState('')
     console.log(manageAllUsers)
     const makeInstructor=(item)=>{
         const role = 'instructor'
@@ -15,6 +17,8 @@ const ManageUsers = () => {
         .then(response=>{
             if(response.data.modifiedCount>0){
                 Swal.fire(`${item.name} is instructor now.`)
+                setDisableInstructor(item._id)
+                setDisableAdmin('')
                 refetch()
             }
         })
@@ -27,7 +31,8 @@ const ManageUsers = () => {
         .then(response=>{
             if(response.data.modifiedCount>0){
                 Swal.fire(`${item.name} is Admin now.`)
-                
+                setDisableAdmin(item._id)
+                setDisableInstructor('')
                 refetch()
             }
         })
@@ -65,8 +70,8 @@ const ManageUsers = () => {
                                 <td>{item.email}</td>
                                 <td>{item.role || 'student'}</td>
                                 
-                                <td><button onClick={()=>makeInstructor(item)} className='btn btn-success btn-sm'>Instructor</button></td>
-                                <td><button  onClick={()=>makeAdmin(item)} className='btn btn-sm btn-error'>Admin</button></td>
+                                <td><button disabled={item._id === disableInstructor} onClick={()=>makeInstructor(item)} className='btn btn-success btn-sm'>Instructor</button></td>
+                                <td><button disabled={item._id === disableAdmin}  onClick={()=>makeAdmin(item)} className='btn btn-sm btn-error'>Admin</button></td>
                                 
                             </tr>)
                         }
