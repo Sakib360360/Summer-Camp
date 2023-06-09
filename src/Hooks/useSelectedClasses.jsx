@@ -7,7 +7,7 @@ const useSelectedClasses = () => {
     const [axiosInstance] = useAxiosSecure()
     const { user, loading } = useContext(AuthContext)
     const { data: selectedClasses = [], refetch } = useQuery({
-        queryKey: ['selectedClasses', user.email],
+        queryKey: ['selectedClasses', user?.email],
         enabled: !loading,
         queryFn: async () => {
             const response = await axiosInstance.get(`/selectedClasses?email=${user?.email}`)

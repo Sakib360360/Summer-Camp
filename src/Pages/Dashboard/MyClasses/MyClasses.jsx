@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import { AuthContext } from '../../Providers/AuthProviders';
+import { Helmet } from 'react-helmet-async';
 
 const MyClasses = () => {
     const [axiosInstance] = useAxiosSecure()
@@ -22,6 +23,9 @@ const MyClasses = () => {
     }
     return (
         <div>
+            <Helmet>
+                <title>Language-Camp|My Classes</title>
+            </Helmet>
             {/* modal show feedback */}
             <div className="modal" id="my_modal_8">
                 <div className="modal-box">

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
 import useManageClasses from '../../../Hooks/useManageClasses';
+import { Helmet } from 'react-helmet-async';
 
 const ManageClasses = () => {
     const [status, setStatus] = useState('pending')
@@ -60,7 +61,9 @@ const ManageClasses = () => {
 
     return (
         <div>
-
+            <Helmet>
+                <title>Language-Camp|Manage Classes</title>
+            </Helmet>
             {/* show all in table */}
             <div className="overflow-x-auto w-full">
                 <table className="table w-full">

@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import { FaAmazonPay } from 'react-icons/fa';
 import { AuthContext } from '../../Providers/AuthProviders';
+import { Helmet } from 'react-helmet-async';
 
 const StudentEnrolledClasses = () => {
     const [axiosInstance] = useAxiosSecure()
@@ -20,6 +21,9 @@ const StudentEnrolledClasses = () => {
     console.log(enrolledClasses)
     return (
         <div>
+            <Helmet>
+                <title>Language-Camp|Enrolled Classes</title>
+            </Helmet>
             <div>
                 <div className="overflow-x-auto w-full">
                     <table className="table w-full">

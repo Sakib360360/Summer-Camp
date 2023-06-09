@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Providers/AuthProviders';
+import { Helmet } from 'react-helmet-async';
 
 const StudentSelectedClasses = () => {
     const [selectedClasses, refetch] = useSelectedClasses()
@@ -43,9 +44,13 @@ const StudentSelectedClasses = () => {
     // console.log(selectedClasses)
     return (
         <div>
+            <Helmet>
+                <title>Language-Camp|Selected Classes</title>
+            </Helmet>
             {/* show all classes in table */}
             {/* table */}
             <div>
+                
                 <div className="overflow-x-auto w-full">
                     <table className="table w-full">
                         {/* head */}

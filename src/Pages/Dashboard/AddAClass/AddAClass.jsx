@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../Providers/AuthProviders';
+import { Helmet } from 'react-helmet-async';
 
 const AddAClass = () => {
     const { register, handleSubmit } = useForm();
@@ -49,6 +50,9 @@ const AddAClass = () => {
     return (
         // TODO: button disabled when any field is not filled
         <div>
+            <Helmet>
+                <title>Language-Camp|Add a Class</title>
+            </Helmet>
             <form onSubmit={handleSubmit(onSubmit)} className="max-w-md mx-auto mt-8">
                 <div className="mb-4">
                     <label htmlFor="className" className="block text-gray-700 font-bold mb-2">

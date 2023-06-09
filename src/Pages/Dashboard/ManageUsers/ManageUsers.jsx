@@ -3,6 +3,7 @@ import { AuthContext } from '../../Providers/AuthProviders';
 import useManageUsers from '../../../Hooks/useManageUsers';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
+import { Helmet } from 'react-helmet-async';
 
 const ManageUsers = () => {
     const { user } = useContext(AuthContext)
@@ -40,6 +41,9 @@ const ManageUsers = () => {
     }
     return (
         <div>
+            <Helmet>
+                <title>Language-Camp|Manage Users</title>
+            </Helmet>
             <div className="overflow-x-auto w-full">
                 <table className="table w-full">
                     {/* head */}

@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import { AuthContext } from '../../Providers/AuthProviders';
+import { Helmet } from 'react-helmet-async';
 
 const StudentPaymentHistory = () => {
     const [axiosInstance] = useAxiosSecure()
@@ -20,6 +21,9 @@ const StudentPaymentHistory = () => {
     console.log(enrolledClasses)
     return (
         <div>
+            <Helmet>
+                <title>Language-Camp|Payment History</title>
+            </Helmet>
             <div className="overflow-x-auto w-full">
                 <table className="table w-full">
                     {/* head */}

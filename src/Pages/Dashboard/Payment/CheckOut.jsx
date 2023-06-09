@@ -7,6 +7,7 @@ import { useContext } from 'react';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import { AuthContext } from '../../Providers/AuthProviders';
 import Swal from 'sweetalert2';
+import { Helmet } from 'react-helmet-async';
 
 const CheckOut = () => {
     const stripe = useStripe()
@@ -27,14 +28,14 @@ const CheckOut = () => {
     const enrolledItem = {...paymentItem,transactionId,date};
 
 
-    // console.log('payment item', paymentItem)
+    console.log(enrolledItem)
 
     useEffect(() => {
         axiosInstance.post('/create-payment-intent', { price })
             .then(res => {
                 setClientSecret(res.data.clientSecret)
             })
-    }, [price,axiosInstance])
+    }, [price, axiosInstance])
 
 
 
@@ -88,6 +89,7 @@ const CheckOut = () => {
             
             if (transactionId) {
                 setTransactioId(transactionId)
+                Swal.fire('you got id')
                 setSuccess('Done,', transactionId)
                 const payment = {
                     payer: user?.email,
@@ -148,6 +150,9 @@ const CheckOut = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>Language-Camp|Payment</title>
+            </Helmet>
             <form onSubmit={handleSubmit}>
                 <CardElement
                     options={{
