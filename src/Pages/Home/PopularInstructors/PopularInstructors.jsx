@@ -5,7 +5,8 @@ import InstructorsCard from '../../../Components/InstructorsCard';
 
 const PopularInstructors = () => {
     const [instructors, refetch] = useInstructorsAll()
-    const token = localStorage.getItem('access-token');
+    // const token = localStorage.getItem('access-token');
+    console.log(instructors)
 
     return (
         <div className='grid grid-cols-1 md:grid-cols-3 gap-4 mt-8'>
