@@ -27,14 +27,14 @@ const CheckOut = () => {
     const enrolledItem = {...paymentItem,transactionId,date};
 
 
-    console.log(enrolledItem)
+    // console.log('payment item', paymentItem)
 
     useEffect(() => {
         axiosInstance.post('/create-payment-intent', { price })
             .then(res => {
                 setClientSecret(res.data.clientSecret)
             })
-    }, [price, axiosInstance])
+    }, [price,axiosInstance])
 
 
 

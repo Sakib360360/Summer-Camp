@@ -8,6 +8,7 @@ const useManageClasses = () => {
     const {user,loading} = useContext(AuthContext)
     const {data:allClasses=[],refetch} = useQuery({
         queryKey:['manageClasses'],
+        enabled:!loading,
         queryFn:async ()=>{
             const response = await  axiosInstance.get('/allClasses')
             return response.data

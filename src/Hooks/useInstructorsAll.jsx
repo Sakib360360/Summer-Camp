@@ -1,19 +1,20 @@
 import React, { useContext } from 'react';
-import { AuthContext } from '../Pages/Providers/AuthProviders';
 import { useQuery } from '@tanstack/react-query';
 import useAxios from './useAxios';
+import { AuthContext } from '../Pages/Providers/AuthProviders';
 
 const useInstructorsAll = () => {
-    const {user} = useContext(AuthContext)
+    const { loading } = useContext(AuthContext)
     const [axiosInstance] = useAxios()
-    const {data:instructors=[],refetch} = useQuery({
-        queryKey:['instructors'],
-        queryFn:async ()=>{
+    const { data: instructors = [], refetch } = useQuery({
+        queryKey: ['instructors'],
+        enabled: !loading,
+        queryFn: async () => {
             const response = await axiosInstance.get('/instructors')
             return response.data;
         }
     })
-    return [instructors,refetch]
+    return [instructors, refetch]
 };
 
 export default useInstructorsAll;

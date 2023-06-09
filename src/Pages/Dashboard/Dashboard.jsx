@@ -51,10 +51,10 @@ const Dashboard = () => {
                     <div className='w-full absolute top-0 left-0'>
                     <NavBar></NavBar>
                     </div>
-                    <div className='min-h-screen mt-24'>
+                    <div className='min-h-screen w-full mt-24'>
                     <Outlet></Outlet>
                     </div>
-                    <div className='w-full absolute bottom-0 left-0'>
+                    <div className='w-full  '>
                     <Footer></Footer>
                     </div>
                     <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">Open drawer</label>
