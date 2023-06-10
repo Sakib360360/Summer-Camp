@@ -46,9 +46,9 @@ const Dashboard = () => {
 
         <div className="drawer lg:drawer-open">
                 <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-                <div className="drawer-content flex flex-col items-center relative justify-center">
+                <div className="drawer-content flex flex-col bg-slate-300 items-center relative justify-center">
                     {/* Page content here */}
-                    <div className='w-full absolute top-0 left-0'>
+                    <div className='w-full absolute  top-0 left-0'>
                     <NavBar></NavBar>
                     </div>
                     <div className='min-h-screen w-full mt-24'>

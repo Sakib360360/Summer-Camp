@@ -4,6 +4,7 @@ import useManageUsers from '../../../Hooks/useManageUsers';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
 import { Helmet } from 'react-helmet-async';
+import { FaChalkboardTeacher,FaUserTie } from "react-icons/fa";
 
 const ManageUsers = () => {
     const { user } = useContext(AuthContext)
@@ -74,8 +75,8 @@ const ManageUsers = () => {
                                 <td>{item.email}</td>
                                 <td>{item.role || 'student'}</td>
                                 
-                                <td><button disabled={item._id === disableInstructor || item.role === 'instructor'} onClick={()=>makeInstructor(item)} className='btn btn-success btn-sm'>Instructor</button></td>
-                                <td><button disabled={item._id === disableAdmin || item.role === 'admin'}  onClick={()=>makeAdmin(item)} className='btn btn-sm btn-error'>Admin</button></td>
+                                <td><button disabled={item._id === disableInstructor || item.role === 'instructor'} onClick={()=>makeInstructor(item)} className='btn btn-success btn-sm'><FaChalkboardTeacher></FaChalkboardTeacher>Instructor</button></td>
+                                <td><button disabled={item._id === disableAdmin || item.role === 'admin'}  onClick={()=>makeAdmin(item)} className='btn btn-sm btn-success'><FaUserTie></FaUserTie>Admin</button></td>
                                 
                             </tr>)
                         }
