@@ -32,7 +32,7 @@ const Card = ({item}) => {
     }
     return (
         <div className={`card w-80 bg-base-100 ${item.seats <1 && 'bg-red-200'}`}>
-            <figure><img className="" src={classImage} alt="Shoes" /></figure>
+            <figure><img className="" src={classImage} alt="Not uploaded yet" /></figure>
             <div className="card-body">
                 <h2 className="card-title">{className}</h2>
                 <p>Instructor:{classInstructor}</p>

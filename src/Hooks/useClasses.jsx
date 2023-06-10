@@ -8,7 +8,6 @@ const useClasses = () => {
     const [axiosInstance] = useAxios()
     const {refetch, data:classes=[]} = useQuery({
         queryKey:['classes'],
-        enabled:!loading,
         queryFn: async ()=>{
             const response = await axiosInstance('/classes')
             return response.data;

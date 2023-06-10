@@ -30,7 +30,7 @@ const PopularClasses = () => {
     enrolledClasses.find((obj) => obj.className === className)
   );
   
-  console.log(sortedObjects);
+  // console.log(sortedObjects);
 
 
 

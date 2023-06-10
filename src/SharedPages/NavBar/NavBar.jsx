@@ -1,25 +1,26 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { AuthContext } from '../../Pages/Providers/AuthProviders';
+import { FaMoon,FaRegMoon } from 'react-icons/fa';
 
 const NavBar = () => {
     const { user, logOut } = useContext(AuthContext)
     const [isDarkMode, setIsDarkMode] = useState(true);
     useEffect(() => {
         const htmlElement = document.querySelector('html');
-        
-        if (isDarkMode) {
-          htmlElement.classList.add('dark');
-          document.querySelector("html").setAttribute("data-theme","light")
-        } else {
-          htmlElement.classList.remove('dark');
-          document.querySelector("html").setAttribute("data-theme","dark")
-        }
-      }, [isDarkMode]);
 
-      const toggleDarkMode = () => {
+        if (isDarkMode) {
+            htmlElement.classList.add('dark');
+            document.querySelector("html").setAttribute("data-theme", "light")
+        } else {
+            htmlElement.classList.remove('dark');
+            document.querySelector("html").setAttribute("data-theme", "dark")
+        }
+    }, [isDarkMode]);
+
+    const toggleDarkMode = () => {
         setIsDarkMode(!isDarkMode);
-      };
+    };
 
     const handleSignOut = () => {
         logOut()
@@ -58,15 +59,17 @@ const NavBar = () => {
                 </div>
                 <div className="navbar-end">
                     {
-                        <button className='mr-8' onClick={toggleDarkMode}>
-                        {isDarkMode ? 'Light Mode' : 'Dark Mode'}
-                      </button>
+                        <button className='mr-8 flex items-center justify-center gap-2' onClick={toggleDarkMode}>
+                            <FaRegMoon></FaRegMoon>
+                            <input type="checkbox" className="toggle toggle-md" />
+                            <FaMoon></FaMoon>
+                        </button>
                     }
 
 
                     {
-                        user ? <p className='mr-6'><Link onClick={handleSignOut}>Sign out</Link></p> : <><li><NavLink to='/login'>Login</NavLink></li>
-                            <li><NavLink to='/register'>Sign Up</NavLink></li></>
+                        user ? <p className='mr-6'><Link onClick={handleSignOut}>Sign out</Link></p> : <><p><NavLink to='/login'>Login</NavLink></p>
+                        </>
                     }
                     {
                         user?.photoURL && <label className="btn hidden md:block btn-ghost btn-circle avatar">

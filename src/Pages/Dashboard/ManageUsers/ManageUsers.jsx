@@ -74,8 +74,8 @@ const ManageUsers = () => {
                                 <td>{item.email}</td>
                                 <td>{item.role || 'student'}</td>
                                 
-                                <td><button disabled={item._id === disableInstructor} onClick={()=>makeInstructor(item)} className='btn btn-success btn-sm'>Instructor</button></td>
-                                <td><button disabled={item._id === disableAdmin}  onClick={()=>makeAdmin(item)} className='btn btn-sm btn-error'>Admin</button></td>
+                                <td><button disabled={item._id === disableInstructor || item.role === 'instructor'} onClick={()=>makeInstructor(item)} className='btn btn-success btn-sm'>Instructor</button></td>
+                                <td><button disabled={item._id === disableAdmin || item.role === 'admin'}  onClick={()=>makeAdmin(item)} className='btn btn-sm btn-error'>Admin</button></td>
                                 
                             </tr>)
                         }

@@ -8,7 +8,6 @@ const useInstructorsAll = () => {
     const [axiosInstance] = useAxios()
     const { data: instructors = [], refetch } = useQuery({
         queryKey: ['instructors'],
-        enabled: !loading,
         queryFn: async () => {
             const response = await axiosInstance.get('/instructors')
             return response.data;

@@ -25,7 +25,7 @@ const CheckOut = () => {
     const price = paymentItem.price
 
     const date = new Date()
-    const enrolledItem = {...paymentItem,transactionId,date};
+    const enrolledItem = { ...paymentItem, transactionId, date };
 
 
     console.log(enrolledItem)
@@ -86,7 +86,7 @@ const CheckOut = () => {
         if (paymentIntent.status === 'succeeded') {
 
             const transactionId = paymentIntent.id;
-            
+
             if (transactionId) {
                 setTransactioId(transactionId)
                 Swal.fire('you got id')
@@ -97,6 +97,14 @@ const CheckOut = () => {
                     price,
 
                 }
+
+
+
+
+
+
+
+
                 // update availble seats
 
                 axiosInstance.patch(`/updateAvailableSeats/${paymentItem.selectedClassId}`, { updatedSeats })
@@ -129,11 +137,23 @@ const CheckOut = () => {
 
                 // add this to enrolled classes
 
-                axiosInstance.post('/enrolledClasses', {enrolledItem})
+                axiosInstance.post('/enrolledClasses', { enrolledItem })
                     .then(response => {
                         console.log(response.data)
                     })
                     .catch(error => console.log(error))
+
+
+
+
+                // update instructors object in enrolledStudents property
+                // axiosInstance.patch(`/updateInstructorEnrolledStudents/${paymentItem.classInstructor}`, { transactionId })
+                //     .then(response => {
+                //         if (response.data.modifiedCount) {
+                //             Swal.fire('Instructors prof updated')
+                //         }
+                //     })
+                //     .catch(error => console.log(error))
 
 
 
