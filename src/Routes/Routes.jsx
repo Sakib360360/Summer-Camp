@@ -95,6 +95,7 @@ const Routes = createBrowserRouter([
                 path:'adminHome',
                 element:<AdminRoutes><AdminHome></AdminHome></AdminRoutes>
             },
+            
             {
                 path:'manageClasses',
                 element:<AdminRoutes><ManageClasses></ManageClasses></AdminRoutes>

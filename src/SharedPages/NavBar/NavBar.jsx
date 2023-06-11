@@ -2,11 +2,15 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { AuthContext } from '../../Pages/Providers/AuthProviders';
 import { FaMoon, FaRegMoon, FaSchool } from 'react-icons/fa';
+import useAdmin from '../../Hooks/useAdmin';
+import useInstructor from '../../Hooks/useInstructor';
 
 const NavBar = () => {
     const { user, logOut } = useContext(AuthContext)
     const [scroll, setScroll] = useState(false);
     const [isDarkMode, setIsDarkMode] = useState(true);
+    const [isAdmin,] = useAdmin()
+    const [isInstructor,] = useInstructor()
     useEffect(() => {
         const htmlElement = document.querySelector('html');
 
@@ -59,7 +63,7 @@ const NavBar = () => {
         {
             user && <li><NavLink className={({ isActive, isPending }) =>
                 isPending ? "pending" : isActive ? "underline" : ""
-            } to='/dashboard'>Dashboard</NavLink></li>
+            } to={isAdmin ? '/dashboard/adminHome' : isInstructor? '/dashboard/instructorHome' : '/dashboard/studenthome'}>Dashboard</NavLink></li>
         }
 
     </>
