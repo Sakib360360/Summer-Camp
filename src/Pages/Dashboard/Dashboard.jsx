@@ -44,25 +44,30 @@ const Dashboard = () => {
 
 
 
-        <div className="drawer lg:drawer-open">
+        <div className="drawer relative lg:drawer-open">
                 <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content flex flex-col bg-slate-300 items-center relative justify-center">
                     {/* Page content here */}
                     <div className='w-full absolute  top-0 left-0'>
                     <NavBar></NavBar>
+                    
                     </div>
+                    <div className=' top-56 fixed left-8 z-20'>
+                    <label htmlFor="my-drawer-2" className="btn btn-outline drawer-button lg:hidden">Dashboart Menu</label>
+                    </div>
+                    
                     <div className='min-h-screen w-full mt-24'>
                     <Outlet></Outlet>
                     </div>
                     <div className='w-full  '>
                     <Footer></Footer>
                     </div>
-                    <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">Open drawer</label>
+                    
 
                 </div>
                 <div className="drawer-side">
                     <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-                    <ul className="menu p-4 w-80 h-full bg-slate-500 text-black">
+                    <ul className="menu p-4 w-72 h-full bg-slate-500 text-black">
                         {/* Sidebar content here */}
                         {navItems}
                     </ul>

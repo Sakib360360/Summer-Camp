@@ -7,6 +7,8 @@ import PopularInstructors from '../PopularInstructors/PopularInstructors';
 import SectionTitle from '../../../Components/SectionTitle';
 import { Link } from 'react-router-dom';
 import ParallaxSection from '../../../Components/ParallaxSection';
+import Testimonials from '../../../Components/Testimonials';
+import NewsLetter from '../../../Components/NewsLetter';
 
 const Home = () => {
     const { user } = useContext(AuthContext)
@@ -34,6 +36,13 @@ const Home = () => {
             </div>
             <div>
                 <ParallaxSection></ParallaxSection>
+            </div>
+            <SectionTitle head={'Reviews'} subHead={'What Learner Say'}></SectionTitle>
+            <div>
+                <Testimonials></Testimonials>
+            </div>
+            <div>
+                <NewsLetter></NewsLetter>
             </div>
         </div>
     );
