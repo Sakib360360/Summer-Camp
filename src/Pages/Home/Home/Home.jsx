@@ -41,6 +41,7 @@ const Home = () => {
             <div>
                 <Testimonials></Testimonials>
             </div>
+            <SectionTitle head={'Stay Connected'} subHead={'24/7 Services'}></SectionTitle>
             <div>
                 <NewsLetter></NewsLetter>
             </div>

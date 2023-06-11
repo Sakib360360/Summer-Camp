@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { AuthContext } from '../Pages/Providers/AuthProviders';
 import Swal from 'sweetalert2';
 import useAxiosSecure from '../Hooks/useAxiosSecure';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Card = ({item}) => {
     const {className,seats,classImage,price,classInstructor} = item;
@@ -11,6 +11,7 @@ const Card = ({item}) => {
     const {user} = useContext(AuthContext)
     const [axiosInstance] = useAxiosSecure()
     const [disabled,setDisabled] = useState(false)
+    const location = useLocation()
     const navigate = useNavigate()
 
     
@@ -36,7 +37,7 @@ const Card = ({item}) => {
               }).then((result) => {
                 /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {
-                  navigate('/login')
+                  navigate('/login',{state:{from:location}})
                 }
               })
         }

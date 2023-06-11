@@ -4,7 +4,7 @@ import { FaSchool } from 'react-icons/fa';
 const Footer = () => {
     return (
         <div>
-            <footer className="footer mt-12 p-10 bg-base-200 text-base-content">
+            <footer className="footer  p-10 bg-base-200 text-base-content">
                 <div>
                     <FaSchool className=' text-4xl'></FaSchool><br />
                     <p>Language-Camp<br />Providing Different Language Courses</p>

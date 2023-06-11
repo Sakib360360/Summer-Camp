@@ -60,7 +60,7 @@ const StudentPaymentHistory = () => {
                                 <td>
                                     {item.classInstructor}
                                 </td>
-                                <td><p className='bg-success px-2 py-1 rounded-md w-10'>Paid</p></td>
+                                <td><p className=''>Paid</p></td>
                                 <td>{item.date}</td>
                             </tr>)
                         }

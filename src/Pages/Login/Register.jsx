@@ -93,36 +93,33 @@ const Register = () => {
             <Helmet>
                 <title>Language-Camp|sign up</title>
             </Helmet>
-            <div className="hero min-h-screen bg-base-200">
-                <div className="hero-content flex-col lg:flex-row-reverse">
-                    <div className="text-center lg:text-left">
-                        <h1 className="text-5xl font-bold">Sign Up!</h1>
-                        <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
-                    </div>
-                    <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+            <div className="hero min-h-screen bg-[url('https://wallpapercave.com/wp/wp9764105.jpg')]">
+                <div className="hero-content w-full  md:w-3/4 mx-auto mt-20">
+                    
+                    <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-transparent">
                         <form onSubmit={handleSubmit(onSubmit)} className="card-body">
                             <div className="form-control">
                                 <label className="label">
-                                    <span className="label-text">Name</span>
+                                    <span className="label-text text-white">Name</span>
                                 </label>
-                                <input type="text" placeholder="Name" {...register("name")} className="input input-bordered" />
+                                <input type="text" placeholder="Name" {...register("name")} className="input input-bordered bg-transparent placeholder-white shadow-2xl " />
                             </div>
                             <div className="form-control">
                                 <label className="label">
-                                    <span className="label-text">Email</span>
+                                    <span className="label-text text-white">Email</span>
                                 </label>
-                                <input type="email" placeholder="email" {...register("email")} className="input input-bordered" />
+                                <input type="email" placeholder="email" {...register("email")} className="input input-bordered bg-transparent placeholder-white shadow-2xl" />
                             </div>
                             <div className="form-control">
                                 <label className="label">
-                                    <span className="label-text">Password</span>
+                                    <span className="label-text text-white">Password</span>
                                 </label>
                                 <input type="password" placeholder="password" {...register("password", {
                                     required: true,
 
                                     minLength: 6,
                                     pattern: /(?=.*[!@#$%^&*])(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*]/
-                                })} className="input input-bordered" />
+                                })} className="input input-bordered bg-transparent placeholder-white shadow-2xl" />
                                 {errors.password?.type === 'required' && <p className='text-red-600' role="alert">Password in required</p>}
 
                                 {errors.password?.type === 'minLength' && <p className='text-red-600' role="alert">Password must be greater than 6 charecters</p>}
@@ -131,28 +128,28 @@ const Register = () => {
                             </div>
                             <div className="form-control">
                                 <label className="label">
-                                    <span className="label-text">Confirm Password</span>
+                                    <span className="label-text text-white">Confirm Password</span>
                                 </label>
-                                <input type="password" placeholder="Confirm Password" {...register("confirm_password")} className="input input-bordered" />
+                                <input type="password" placeholder="Confirm Password" {...register("confirm_password")} className="input input-bordered bg-transparent placeholder-white shadow-2xl" />
                                 <p className='text-red-600'>{error}</p>
                             </div>
                             <div className="form-control">
                                 <label className="label">
-                                    <span className="label-text">Photo URL</span>
+                                    <span className="label-text text-white">Photo URL</span>
                                 </label>
-                                <input type="text" placeholder="Phoro URL" {...register("photo_url")} className="input input-bordered" />
+                                <input type="text" placeholder="Phoro URL" {...register("photo_url")} className="input input-bordered bg-transparent placeholder-white shadow-2xl" />
                             </div>
                             <div>
                                 <p>Already have an account? <Link to='/login' className='text-blue-400'>Login</Link></p>
                             </div>
                             <div className="form-control mt-6">
-                                <button className="btn btn-primary">Register</button>
+                                <button className="btn btn-outline text-white">Register</button>
                             </div>
 
                         </form>
                         <div className="card-body mt-[-40px]">
                             <div className="divider">OR</div>
-                            <button onClick={handleGoogleLogin} className="btn btn-block">Google</button>
+                            <button onClick={handleGoogleLogin} className="btn btn-block btn-outline text-white">Google</button>
                         </div>
 
                     </div>
