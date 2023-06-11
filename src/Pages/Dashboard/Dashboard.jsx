@@ -48,11 +48,11 @@ const Dashboard = () => {
                 <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content flex flex-col bg-slate-300 items-center relative justify-center">
                     {/* Page content here */}
-                    <div className='w-full absolute  top-0 left-0'>
+                    <div className='w-full absolute hidden md:block  top-0 left-0'>
                     <NavBar></NavBar>
                     
                     </div>
-                    <div className=' top-56 fixed left-8 z-20'>
+                    <div className=' top-4 fixed right-1/2 z-20'>
                     <label htmlFor="my-drawer-2" className="btn btn-outline drawer-button lg:hidden">Dashboart Menu</label>
                     </div>
                     

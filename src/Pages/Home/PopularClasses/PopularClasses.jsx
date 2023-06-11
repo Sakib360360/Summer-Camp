@@ -21,24 +21,26 @@ const PopularClasses = () => {
     counts[className] = (counts[className] || 0) + 1;
     return counts;
   }, {});
-  
+
   const uniqueClassNames = [...new Set(enrolledClasses.map((obj) => obj.className))];
-  
+
   uniqueClassNames.sort((a, b) => classNameCounts[b] - classNameCounts[a]);
-  
+
   const sortedObjects = uniqueClassNames.map((className) =>
     enrolledClasses.find((obj) => obj.className === className)
   );
-  
+
   // console.log(sortedObjects);
 
 
 
   return (
-    <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
-      {
-        sortedObjects.map(item => <Card key={item._id} item={item}></Card>)
-      }
+    <div className='flex justify-center'>
+      <div className='grid grid-cols-1 justify-center items-center md:grid-cols-3 gap-6'>
+        {
+          sortedObjects.map(item => <Card key={item._id} item={item}></Card>)
+        }
+      </div>
     </div>
   );
 };
