@@ -47,7 +47,7 @@ const StudentPaymentHistory = () => {
                                 <td>
                                     <div className="flex items-center space-x-3">
                                         <div className="flex flex-col">
-                                            <div className="mask mask-squircle w-12 h-12">
+                                            <div className="mask mask-half-2 w-12 h-12">
                                                 <img src={item.classImage} />
                                             </div>
                                             <div>

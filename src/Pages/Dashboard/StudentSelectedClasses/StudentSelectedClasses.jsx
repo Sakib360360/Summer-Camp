@@ -92,9 +92,9 @@ const StudentSelectedClasses = () => {
                                     <td>{item.price}</td>
                                     <td>{item.seats}</td>
                                     <td>
-                                        <button onClick={() => handleDelete(item._id)}><FaTrashAlt></FaTrashAlt></button>
+                                        <button className='btn hover:bg-transparent hover:text-red-500 btn-out btn-sm bg-transparent' onClick={() => handleDelete(item._id)}><FaTrashAlt></FaTrashAlt></button>
                                     </td>
-                                    <td><Link to='../payment'><button onClick={()=>paymentItemPass(item)}><FaAmazonPay></FaAmazonPay></button></Link></td>
+                                    <td><Link to='../payment'><button className='btn btn-out btn-sm bg-transparent hover:bg-transparent hover:text-primary' onClick={()=>paymentItemPass(item)}><FaAmazonPay className='w-18'></FaAmazonPay></button></Link></td>
                                 </tr>)
                             }
 

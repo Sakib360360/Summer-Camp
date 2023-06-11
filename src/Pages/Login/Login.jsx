@@ -24,7 +24,7 @@ const Login = () => {
         googleSignIn()
             .then(result => {
                 const loggedUser = result.user;
-                console.log(loggedUser)
+                // console.log(loggedUser)
                 if(loggedUser){
                     navigate(from, { replace: true })
                 }
@@ -36,7 +36,7 @@ const Login = () => {
         signInUser(data.email, data.password)
             .then(result => {
                 const loggedUser = result.user;
-                console.log(loggedUser)
+                // console.log(loggedUser)
                 if (loggedUser) {
                     Swal.fire({
                         position: 'center',

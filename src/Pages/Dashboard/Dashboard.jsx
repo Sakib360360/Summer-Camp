@@ -47,7 +47,7 @@ const Dashboard = () => {
 
         <div className="drawer relative lg:drawer-open">
                 <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-                <div className="drawer-content flex flex-col bg-slate-300 items-center relative justify-center">
+                <div className="drawer-content bg-no-repeat bg-cover flex flex-col bg-[url('https://e0.pxfuel.com/wallpapers/1019/142/desktop-wallpaper-light-blue-for-background.jpg')] items-center relative justify-center">
                     {/* Page content here */}
                     <div className='w-full absolute hidden md:block  top-0 left-0'>
                     <NavBar></NavBar>
@@ -68,7 +68,7 @@ const Dashboard = () => {
                 </div>
                 <div className="drawer-side">
                     <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-                    <ul className="menu p-4 w-72 h-full bg-slate-500 text-black">
+                    <ul className="menu p-4 w-72 h-full bg-no-repeat bg-cover flex flex-col bg-[url('https://e0.pxfuel.com/wallpapers/1019/142/desktop-wallpaper-light-blue-for-background.jpg')] text-black">
                         {/* Sidebar content here */}
                         {navItems}
                     </ul>

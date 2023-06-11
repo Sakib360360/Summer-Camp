@@ -12,7 +12,7 @@ const ManageUsers = () => {
     const [axiosInstance] = useAxiosSecure()
     const [disableInstructor,setDisableInstructor] = useState('')
     const [disableAdmin,setDisableAdmin] = useState('')
-    console.log(manageAllUsers)
+    // console.log(manageAllUsers)
     const makeInstructor=(item)=>{
         const role = 'instructor'
         axiosInstance.put(`/manageUsers/${item._id}`,{role})

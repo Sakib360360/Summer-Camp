@@ -11,7 +11,7 @@ const InstructorHome = () => {
     useEffect(() => {
         axiosInstance.get(`/myClasses/${user.email}`)
             .then(response => {
-                console.log(response.data)
+                // console.log(response.data)
                 setMyClasses(response.data)
             })
     }, [])

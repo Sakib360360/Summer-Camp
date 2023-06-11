@@ -92,7 +92,7 @@ const NavBar = () => {
                 <div className="navbar-end">
                     {
                         <button className='mr-8 flex items-center justify-center gap-2' onClick={toggleDarkMode}>
-                            <FaRegMoon></FaRegMoon>
+                            
                             <input type="checkbox" className="toggle toggle-md" />
                             <FaMoon></FaMoon>
                         </button>

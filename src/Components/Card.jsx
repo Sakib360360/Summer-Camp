@@ -43,15 +43,15 @@ const Card = ({item}) => {
         }
     }
     return (
-        <div className={`card border  shadow-2xl w-80 bg-base-100 ${item.seats <1 && 'bg-red-200'}`}>
-            <figure><img className="h-56" src={classImage} alt="Not uploaded yet" /></figure>
-            <div className="card-body">
-                <h2 className="card-title">Language: {className}</h2>
-                <p>Instructor: {classInstructor}</p>
-                <p>Seats: {seats}</p>
-                <p >Price: <span className='text-blue-800'>${price}</span> </p>
+        <div className={`card border rounded-tl-3xl rounded-br-3xl rounded-tr-none rounded-bl-none  shadow-2xl w-72 bg-base-100 ${item.seats <1 && 'bg-red-200'}`}>
+            <figure><img className="h-48" src={classImage} alt="Not uploaded yet" /></figure>
+            <div className="card-body h-52 space-y-0">
+                <h2 className="card-title my-0">Language: {className}</h2>
+                <p className='mt-0'>Instructor: {classInstructor}</p>
+                <p className='mt-0'>Seats: {seats}</p>
+                <p className='mt-0' >Price: <span className='text-blue-800'>${price}</span> </p>
                 <div className="card-actions justify-end">
-                    <button disabled={ item.seats<1 ? true : false} onClick={()=>handleSelect(item)} className="btn btn-outline">Select</button>
+                    <button disabled={ item.seats<1 ? true : false} onClick={()=>handleSelect(item)} className="btn btn-sm btn-block rounded-tl-2xl rounded-br-2xl rounded-tr-none rounded-bl-none btn-outline">Select</button>
                 </div>
             </div>
         </div>

@@ -9,7 +9,7 @@ const AddAClass = () => {
     const { register, handleSubmit } = useForm();
     const [axiosInstance] = useAxiosSecure()
     const { user } = useContext(AuthContext)
-    console.log(user)
+    // console.log(user)
     const imgKey = import.meta.env.VITE_imgbb_api_key;
     const imgURLHosting = `https://api.imgbb.com/1/upload?key=${imgKey}`
     const onSubmit = (data) => {
@@ -42,14 +42,14 @@ const AddAClass = () => {
                             }
                         })
                         .catch(error => console.log(error))
-                    console.log(newItem)
+                    // console.log(newItem)
                 }
 
             })
     };
     return (
         // TODO: button disabled when any field is not filled
-        <div>
+        <div className='mb-12'>
             <Helmet>
                 <title>Language-Camp|Add a Class</title>
             </Helmet>

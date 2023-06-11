@@ -21,7 +21,7 @@ const Register = () => {
                 setUsers(response.data)
             })
     }, [])
-    console.log(users)
+    // console.log(users)
     const handleGoogleLogin = () => {
         googleSignIn()
             .then(result => {
@@ -43,8 +43,8 @@ const Register = () => {
                             }
                         })
                 }
-                console.log(loggedUser)
-                console.log('existing ', existingUser)
+                // console.log(loggedUser)
+                // console.log('existing ', existingUser)
 
             })
         navigate('/')

@@ -12,11 +12,11 @@ const MyClasses = () => {
     const navigate = useNavigate()
 
 
-    console.log(myClasses)
+    // console.log(myClasses)
     useEffect(() => {
         axiosInstance.get(`/myClasses/${user.email}`)
             .then(response => {
-                console.log(response.data)
+                // console.log(response.data)
                 setMyClasses(response.data)
             })
     }, [])

@@ -42,7 +42,7 @@ const UpdateAClass = () => {
                         .then(response => {
                             if (response.data) {
                                 Swal.fire('updated')
-                                console.log(response.data)
+                                // console.log(response.data)
                             }
                         })
                         .catch(error => console.log(error))

@@ -30,7 +30,7 @@ const CheckOut = () => {
     const enrolledItem = { ...paymentItem, transactionId, date };
 
 
-    console.log(enrolledItem)
+    // console.log(enrolledItem)
 
     useEffect(() => {
         axiosInstance.post('/create-payment-intent', { price })
@@ -42,7 +42,7 @@ const CheckOut = () => {
     const [allClasses] = useManageClasses()
     // console.log(allClasses)
     const enrolledStudents = allClasses.map(item => item.enrolledStudent);
-    console.log(enrolledStudents)
+    // console.log(enrolledStudents)
 
 
 

@@ -30,7 +30,7 @@ const PopularInstructors = () => {
 
     uniqueInstructors.sort((a, b) => instructorCounts[b] - instructorCounts[a]);
 
-    console.log(uniqueInstructors);
+    // console.log(uniqueInstructors);
 
 
 
@@ -45,8 +45,8 @@ const PopularInstructors = () => {
         return indexA - indexB;
     });
 
-    console.log('new instructors', instructors)
-    console.log('enrolled', enrolledClasses)
+    // console.log('new instructors', instructors)
+    // console.log('enrolled', enrolledClasses)
 
     return (
         <div className='flex justify-center'>
