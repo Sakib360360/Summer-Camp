@@ -13,6 +13,7 @@ const AuthProviders = ({children}) => {
     const [loading,setLoading] = useState(true)
     const [user,setUser] = useState(null)
     const [paymentItem,setPaymentItem] = useState({})
+    const [handleUpdateData,setHandleUpdateData] = useState(null)
     const googleProvider = new GoogleAuthProvider()
 
     const createUser = (email,password)=>{
@@ -73,7 +74,9 @@ const AuthProviders = ({children}) => {
         updateUserProfile,
         loading,
         setPaymentItem,
-        paymentItem
+        paymentItem,
+        setHandleUpdateData,
+        handleUpdateData
 
     }
    

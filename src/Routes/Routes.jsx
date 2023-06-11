@@ -22,6 +22,7 @@ import ManageClasses from '../Pages/Dashboard/ManageClasses/ManageClasses';
 import ManageUsers from '../Pages/Dashboard/ManageUsers/ManageUsers';
 import StudentPaymentHistory from '../Pages/Dashboard/StudentPaymentHistoy/StudentPaymentHistory';
 import ErrorPage from '../Pages/ErrorPage/ErrorPage';
+import UpdateAClass from '../Pages/Dashboard/AddAClass/UpdateAClass';
 
 const Routes = createBrowserRouter([
     {
@@ -89,6 +90,10 @@ const Routes = createBrowserRouter([
             {
                 path:'myClasses',
                 element:<InstructorRoutes><MyClasses></MyClasses></InstructorRoutes>
+            },
+            {
+                path:'updateAClass',
+                element:<UpdateAClass></UpdateAClass>
             },
             // admin routes
             {

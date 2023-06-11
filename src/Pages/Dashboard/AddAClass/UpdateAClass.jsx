@@ -5,11 +5,14 @@ import Swal from 'sweetalert2';
 import { AuthContext } from '../../Providers/AuthProviders';
 import { Helmet } from 'react-helmet-async';
 
-const AddAClass = () => {
+
+
+
+
+const UpdateAClass = () => {
     const { register, handleSubmit } = useForm();
     const [axiosInstance] = useAxiosSecure()
-    const { user } = useContext(AuthContext)
-    console.log(user)
+    const {handleUpdateData,user} = useContext(AuthContext)
     const imgKey = import.meta.env.VITE_imgbb_api_key;
     const imgURLHosting = `https://api.imgbb.com/1/upload?key=${imgKey}`
     const onSubmit = (data) => {
@@ -21,11 +24,11 @@ const AddAClass = () => {
         })
             .then(res => res.json())
             .then(imgResponse => {
-                if (imgResponse.success) {
+                if (imgResponse.success || data.image) {
                     const img_url = imgResponse.data.display_url;
-                    data.image = img_url
+                    data.image = img_url || data.image
                     data.price = parseFloat(data.price)
-                    const newItem = {
+                    const updatedItem = {
                         className: data.className,
                         seats: data.availableSeats,
                         price: data.price,
@@ -35,23 +38,23 @@ const AddAClass = () => {
                         status: data.status,
 
                     };
-                    axiosInstance.post('/addAClass', newItem)
+                    axiosInstance.put(`/updateAClass/${handleUpdateData._id}`, updatedItem)
                         .then(response => {
-                            if (response.data.insertedId) {
-                                Swal.fire('Added')
+                            if (response.data) {
+                                Swal.fire('updated')
+                                console.log(response.data)
                             }
                         })
                         .catch(error => console.log(error))
-                    console.log(newItem)
+                    // console.log(updatedItem)
                 }
 
             })
     };
     return (
-        // TODO: button disabled when any field is not filled
         <div>
             <Helmet>
-                <title>Language-Camp|Add a Class</title>
+                <title>Language-Camp|Update a Class</title>
             </Helmet>
             <form onSubmit={handleSubmit(onSubmit)} className="max-w-md mx-auto mt-8">
                 <div className="mb-4">
@@ -61,6 +64,7 @@ const AddAClass = () => {
                     <input
                         type="text"
                         id="className"
+                        defaultValue={handleUpdateData?.className}
                         className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         placeholder="Enter class name"
                         {...register('className', { required: true })}
@@ -103,6 +107,7 @@ const AddAClass = () => {
                     </label>
                     <input
                         type="number"
+                        defaultValue={handleUpdateData?.seats}
                         min='0'
                         id="availableSeats"
                         className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -118,6 +123,7 @@ const AddAClass = () => {
                     <input
                         type="text"
                         id="price"
+                        defaultValue={handleUpdateData?.price}
                         className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         placeholder="Enter price"
                         {...register('price', { required: true })}
@@ -142,7 +148,7 @@ const AddAClass = () => {
                     <label htmlFor="image" className="block text-gray-700 font-bold mb-2">
                         Class Image
                     </label>
-                    <input type="file" {...register('image', { required: true })} className="file-input file-input-bordered w-full max-w-xs " />
+                    <input  type="file" {...register('image', { required: true })} className="file-input file-input-bordered w-full max-w-xs " />
 
                 </div>
 
@@ -157,4 +163,4 @@ const AddAClass = () => {
     );
 };
 
-export default AddAClass;
+export default UpdateAClass;

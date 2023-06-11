@@ -8,6 +8,8 @@ import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import { AuthContext } from '../../Providers/AuthProviders';
 import Swal from 'sweetalert2';
 import { Helmet } from 'react-helmet-async';
+import axios from 'axios';
+import useManageClasses from '../../../Hooks/useManageClasses';
 
 const CheckOut = () => {
     const stripe = useStripe()
@@ -37,6 +39,11 @@ const CheckOut = () => {
             })
     }, [price, axiosInstance])
 
+    const [allClasses] = useManageClasses()
+    // console.log(allClasses)
+    const enrolledStudents = allClasses.map(item => item.enrolledStudent);
+    console.log(enrolledStudents)
+
 
 
 
@@ -58,7 +65,7 @@ const CheckOut = () => {
             console.log('[error]', error);
             setError(error)
         } else {
-            console.log('[PaymentMethod]', paymentMethod);
+            // console.log('[PaymentMethod]', paymentMethod);
         }
 
 
@@ -113,7 +120,7 @@ const CheckOut = () => {
                             setAvailableSeats(availableSeats - 1)
                             Swal.fire('You perchaced a Seat')
                         }
-                        console.log(response.data)
+                        // console.log(response.data)
                     })
                     .catch(error => console.log(error))
 
@@ -131,7 +138,7 @@ const CheckOut = () => {
                 // from selected classes remove item
                 axiosInstance.delete(`/deleteSelectedClass/${paymentItem._id}`)
                     .then(response => {
-                        console.log(response.data)
+                        // console.log(response.data)
                     })
                     .catch(error => console.log(error))
 
@@ -147,7 +154,7 @@ const CheckOut = () => {
 
 
                 // update instructors object in enrolledStudents property
-                // axiosInstance.patch(`/updateInstructorEnrolledStudents/${paymentItem.classInstructor}`, { transactionId })
+                // axiosInstance.patch(`/updateInstructorEnrolledStudents/${paymentItem.classInstructor}`, [...enrolledStudents,transactionId])
                 //     .then(response => {
                 //         if (response.data.modifiedCount) {
                 //             Swal.fire('Instructors prof updated')

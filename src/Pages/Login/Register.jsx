@@ -26,7 +26,7 @@ const Register = () => {
         googleSignIn()
             .then(result => {
                 const loggedUser = result.user;
-                const existingUser = users.some(user=>user.email === loggedUser?.email)
+                const existingUser = users.some(user => user.email === loggedUser?.email)
                 if (!existingUser) {
                     const savedUser = {
                         name: loggedUser.displayName,
@@ -44,7 +44,7 @@ const Register = () => {
                         })
                 }
                 console.log(loggedUser)
-                console.log('existing ',existingUser)
+                console.log('existing ', existingUser)
 
             })
         navigate('/')
@@ -95,20 +95,22 @@ const Register = () => {
             </Helmet>
             <div className="hero min-h-screen bg-[url('https://wallpapercave.com/wp/wp9764105.jpg')]">
                 <div className="hero-content w-full  md:w-3/4 mx-auto mt-20">
-                    
+
                     <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-transparent">
                         <form onSubmit={handleSubmit(onSubmit)} className="card-body">
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text text-white">Name</span>
                                 </label>
-                                <input type="text" placeholder="Name" {...register("name")} className="input input-bordered bg-transparent placeholder-white shadow-2xl " />
+                                <input type="text" placeholder="Name" {...register("name", { required: true })} className="input input-bordered bg-transparent placeholder-white shadow-2xl " />
+                                {errors.name?.type === 'required' && <p className='text-red-600' role="alert">Name is required</p>}
                             </div>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text text-white">Email</span>
                                 </label>
-                                <input type="email" placeholder="email" {...register("email")} className="input input-bordered bg-transparent placeholder-white shadow-2xl" />
+                                <input type="email" placeholder="email" {...register("email", { required: true })} className="input input-bordered bg-transparent placeholder-white shadow-2xl" />
+                                {errors.email?.type === 'required' && <p className='text-red-600' role="alert">Email is required</p>}
                             </div>
                             <div className="form-control">
                                 <label className="label">
@@ -120,7 +122,8 @@ const Register = () => {
                                     minLength: 6,
                                     pattern: /(?=.*[!@#$%^&*])(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*]/
                                 })} className="input input-bordered bg-transparent placeholder-white shadow-2xl" />
-                                {errors.password?.type === 'required' && <p className='text-red-600' role="alert">Password in required</p>}
+                                {errors.password?.type === 'required' && <p className='text-red-600' role="alert">Password is required</p>}
+
 
                                 {errors.password?.type === 'minLength' && <p className='text-red-600' role="alert">Password must be greater than 6 charecters</p>}
                                 {errors.password?.type === 'pattern' && <p className='text-red-600' role="alert">Password must have  a special charecter, a capital letter</p>}

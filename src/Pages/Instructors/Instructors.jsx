@@ -33,7 +33,7 @@ const Instructors = () => {
             </div>
             <SectionTitle head={'Our Instructors'}></SectionTitle>
             <div className='flex justify-center'>
-                <div className='grid mx-auto grid-cols-1 md:grid-cols-4 gap-4'>
+                <div className='grid mx-auto grid-cols-1 md:grid-cols-4 mb-12 gap-4'>
                     <Helmet>
                         <title>Language-Camp|Instructors</title>
                     </Helmet>

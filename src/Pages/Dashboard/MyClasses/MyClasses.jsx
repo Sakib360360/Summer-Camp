@@ -2,15 +2,17 @@ import React, { useContext, useEffect, useState } from 'react';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import { AuthContext } from '../../Providers/AuthProviders';
 import { Helmet } from 'react-helmet-async';
+import { useNavigate } from 'react-router-dom';
 
 const MyClasses = () => {
     const [axiosInstance] = useAxiosSecure()
     const [myClasses, setMyClasses] = useState([])
-    const { user } = useContext(AuthContext)
-    const [feedback,setFeedback] = useState('')
+    const { user,setHandleUpdateData } = useContext(AuthContext)
+    const [feedback, setFeedback] = useState('')
+    const navigate = useNavigate()
 
 
-
+    console.log(myClasses)
     useEffect(() => {
         axiosInstance.get(`/myClasses/${user.email}`)
             .then(response => {
@@ -18,9 +20,18 @@ const MyClasses = () => {
                 setMyClasses(response.data)
             })
     }, [])
-    const feedbackShow = (feedback)=>{
+    const feedbackShow = (feedback) => {
         setFeedback(feedback)
     }
+
+
+
+    const handleUpdate = (item) => {
+        setHandleUpdateData(item)
+        navigate('/dashboard/updateAClass')
+    }
+
+
     return (
         <div>
             <Helmet>
@@ -36,6 +47,8 @@ const MyClasses = () => {
                     </div>
                 </div>
             </div>
+            {/* {modal update} */}
+            
             {/* show all in table */}
             <div className="overflow-x-auto w-full">
                 <table className="table w-full">
@@ -49,7 +62,7 @@ const MyClasses = () => {
                             <th>Instructor</th>
                             <th>Price</th>
                             <th>Available Seats</th>
-                            <th>Total Enrolled Students</th>
+                            <th>Update</th>
                             <th>Status</th>
                             <th>Feedback</th>
                         </tr>
@@ -78,10 +91,10 @@ const MyClasses = () => {
                                 </td>
                                 <td>{item.price}</td>
                                 <td>{item.seats}</td>
-                                <td>{item.enrolledStudent}</td>
+                                <td><button className='' onClick={()=>handleUpdate(item)}>Update</button></td>
                                 <td>{item.status}</td>
                                 {/* TODO: onclick show more */}
-                                <td><button onClick={()=>feedbackShow(item.feedback)}><a href="#my_modal_8" className="btn">See Feedback</a></button></td>
+                                <td><button  onClick={() => feedbackShow(item.feedback)}><a href="#my_modal_8" className="btn" disabled={item.status === 'pending'}>See Feedback</a></button></td>
                             </tr>)
                         }
 

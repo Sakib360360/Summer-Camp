@@ -35,7 +35,7 @@ const PopularClasses = () => {
 
 
   return (
-    <div className='flex justify-center'>
+    <div className='flex justify-center mb-12'>
       <div className='grid grid-cols-1 justify-center items-center md:grid-cols-3 gap-6'>
         {
           sortedObjects.map(item => <Card key={item._id} item={item}></Card>)

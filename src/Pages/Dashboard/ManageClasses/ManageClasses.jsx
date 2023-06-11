@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import useAxiosSecure from '../../../Hooks/useAxiosSecure';
+import React, { useContext, useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import useManageClasses from '../../../Hooks/useManageClasses';
 import { Helmet } from 'react-helmet-async';
+import { AuthContext } from '../../Providers/AuthProviders';
+import useAxios from '../../../Hooks/useAxios';
 
 const ManageClasses = () => {
-    const [status, setStatus] = useState('pending')
-    const [axiosInstance] = useAxiosSecure()
+    const [axiosInstance] = useAxios()
     const [allClasses, refetch] = useManageClasses()
     const [textareaValue, setTextareaValue] = useState('');
     const [sendItem,setSendItem] = useState({})
@@ -59,6 +59,13 @@ const ManageClasses = () => {
     }
 
 
+
+
+
+
+
+
+
     return (
         <div>
             <Helmet>
@@ -107,9 +114,9 @@ const ManageClasses = () => {
                                 <td>
                                     {item.classInstructor}
                                 </td>
+                                <td>{item.instructorEmail}</td>
                                 <td>{item.price}</td>
                                 <td>{item.seats}</td>
-                                <td>{item.enrolledStudent}</td>
                                 <td>{item.status}</td>
                                 <td><button disabled={item.status === 'pending' ? false : true} onClick={() => handleApprove(item)} className='btn btn-success btn-sm'>Approve</button></td>
                                 <td><button disabled={item.status === 'pending' ? false : true} onClick={() => handleDeny(item)} className='btn btn-sm btn-error'>Deny</button></td>

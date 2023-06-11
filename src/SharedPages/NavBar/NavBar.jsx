@@ -69,7 +69,7 @@ const NavBar = () => {
     </>
     return (
         <div>
-            <div className={`fixed z-10  navbar w-full  transition duration-300 ${scroll ? 'bg-white text-black' : 'bg-transparent text-white'
+            <div className={`fixed z-10  navbar max-w-7xl  transition duration-300 ${scroll ? 'bg-white text-black' : 'bg-transparent text-white'
                 }`}>
                 <div className="navbar-start">
                     <div className="dropdown">

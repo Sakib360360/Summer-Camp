@@ -4,6 +4,7 @@ import { AuthContext } from '../Providers/AuthProviders';
 import useInstructor from '../../Hooks/useInstructor';
 import useAdmin from '../../Hooks/useAdmin';
 import Footer from '../../SharedPages/Footer/Footer';
+import { FaChalkboardTeacher,FaRegAddressBook,FaHome,FaUsers,FaUsersCog,FaCcStripe,FaFolder,FaFolderOpen } from "react-icons/fa";
 import NavBar from '../../SharedPages/NavBar/NavBar';
 
 const Dashboard = () => {
@@ -15,24 +16,24 @@ const Dashboard = () => {
 
         {
             isInstructor && <>
-                <li><NavLink to='/dashboard/instructorHome'>Instructor Home</NavLink></li>
-                <li><NavLink to='/dashboard/addAClass'>Add a Class</NavLink></li>
-                <li><NavLink to='/dashboard/myClasses'>My Classes</NavLink></li>
+                <li><NavLink to='/dashboard/instructorHome'>Instructor Home <FaHome></FaHome></NavLink></li>
+                <li><NavLink to='/dashboard/addAClass'>Add a Class <FaRegAddressBook></FaRegAddressBook></NavLink></li>
+                <li><NavLink to='/dashboard/myClasses'>My Classes <FaChalkboardTeacher></FaChalkboardTeacher></NavLink></li>
             </>
         }
         {
             isAdmin && <>
-                <li><NavLink to='/dashboard/adminHome'>Admin Home</NavLink></li>
-                <li><NavLink to='/dashboard/manageClasses'>Manage Classes</NavLink></li>
-                <li><NavLink to='/dashboard/manageUsers'>Manage Users</NavLink></li>
+                <li><NavLink to='/dashboard/adminHome'>Admin Home <FaHome></FaHome></NavLink></li>
+                <li><NavLink to='/dashboard/manageClasses'>Manage Classes <FaChalkboardTeacher></FaChalkboardTeacher></NavLink></li>
+                <li><NavLink to='/dashboard/manageUsers'>Manage Users <FaUsersCog></FaUsersCog></NavLink></li>
             </>
         }
         {
             !isAdmin && !isInstructor ? <>
-                <li><NavLink to='/dashboard/studenthome'>Home</NavLink></li>
-                <li><NavLink to='/dashboard/selectedClasses'>My Selected Classes</NavLink></li>
-                <li><NavLink to='/dashboard/enrolledClasses'>My Enrolled Classes</NavLink></li>
-                <li><NavLink to='/dashboard/paymentHistory'>My Pyament History</NavLink></li>
+                <li><NavLink to='/dashboard/studenthome'>Home <FaHome></FaHome></NavLink></li>
+                <li><NavLink to='/dashboard/selectedClasses'>My Selected Classes <FaFolder></FaFolder></NavLink></li>
+                <li><NavLink to='/dashboard/enrolledClasses'>My Enrolled Classes <FaFolderOpen></FaFolderOpen></NavLink></li>
+                <li><NavLink to='/dashboard/paymentHistory'>My Pyament History <FaCcStripe></FaCcStripe></NavLink></li>
             </> : null
         }
 

@@ -31,7 +31,7 @@ const Classes = () => {
             </div>
             <SectionTitle head={'Our Classes'}></SectionTitle>
             <div className='flex justify-center'>
-                <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
+                <div className='grid grid-cols-1 md:grid-cols-3 mb-12 gap-6'>
                     <Helmet>
                         <title>Language-Camp|Classes</title>
                     </Helmet>

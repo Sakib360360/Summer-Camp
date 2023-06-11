@@ -29,6 +29,12 @@ const Footer = () => {
                     <a className="link hover:text-blue-400 no-underline hover:underline">Privacy policy</a>
                     <a className="link hover:text-blue-400 no-underline hover:underline">Cookie policy</a>
                 </div>
+                <div>
+                    <span className="footer-title">Head Office</span>
+                    <p>Jashore,Noapara</p>
+                    <p>Bangladesh</p>
+                    <p>Mobile: +8817205400000</p>
+                </div>
             </footer>
             <footer className="footer bg-base-200 footer-center p-4 text-base-content">
                 <div>
