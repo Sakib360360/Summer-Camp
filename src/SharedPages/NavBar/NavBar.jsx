@@ -6,7 +6,7 @@ import useAdmin from '../../Hooks/useAdmin';
 import useInstructor from '../../Hooks/useInstructor';
 
 const NavBar = () => {
-    const { user, logOut } = useContext(AuthContext)
+    const { user, logOut,setIsAdmin,setInstructor } = useContext(AuthContext)
     const [scroll, setScroll] = useState(false);
     const [isDarkMode, setIsDarkMode] = useState(true);
     const [isAdmin,] = useAdmin()
@@ -47,8 +47,12 @@ const NavBar = () => {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
+    useEffect(()=>{
+        setIsAdmin(isAdmin)
+        setInstructor(isInstructor)
 
-
+    },[isAdmin,isInstructor])
+    
     const navItems = <>
         <li className=''><NavLink className={({ isActive, isPending }) =>
             isPending ? "pending" : isActive ? "underline" : ""

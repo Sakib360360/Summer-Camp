@@ -155,7 +155,7 @@ const ManageClasses = () => {
                                         </div>
                                     </div>
                                 </>
-                                <td><button onClick={()=>handleSendFeedback(item)} className=''><a href="#my_modal_8" className="btn">Send Feedback</a></button></td>
+                                <td><button  onClick={()=>handleSendFeedback(item)} className=''><a href="#my_modal_8" disabled={item.status === 'pending' || item.status === 'approved'} className="btn btn-sm">Send Feedback</a></button></td>
                             </tr>)
                         }
 

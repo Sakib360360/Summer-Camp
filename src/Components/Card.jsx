@@ -8,12 +8,15 @@ const Card = ({item}) => {
     const {className,seats,classImage,price,classInstructor} = item;
     // const [isAdmin,] = useAdmin()
     // const [isInstructor,] = useInstructor()
-    const {user} = useContext(AuthContext)
+    const {user,isAdmin,isInstructor} = useContext(AuthContext)
     const [axiosInstance] = useAxiosSecure()
     const [disabled,setDisabled] = useState(false)
     const location = useLocation()
     const navigate = useNavigate()
-
+    // console.log(isAdmin,isInstructor)
+    // if(isAdmin || isInstructor || item.seats<1){
+    //     setDisabled(true)
+    // }
     
     const handleSelect =(item)=>{
         if(user?.email){
