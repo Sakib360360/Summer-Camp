@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import Card from '../../../Components/Card';
-
+// import useInstructor from '../../../Hooks/useInstructor';
 import useAxios from '../../../Hooks/useAxios';
+// import useAdmin from '../../../Hooks/useAdmin';
 
 const PopularClasses = () => {
   const [axiosInstance] = useAxios()
+  // const [isInstructor, ] = useInstructor()
   const [enrolledClasses, setEnrolledClasses] = useState([])
+  // const [isAdmin,] = useAdmin()
+  
 
   useEffect(() => {
     axiosInstance.get('/enrolledClasses')
@@ -38,7 +42,7 @@ const PopularClasses = () => {
     <div className='flex justify-center mb-12'>
       <div className='grid grid-cols-1 justify-center items-center md:grid-cols-3 gap-6'>
         {
-          sortedObjects.map(item => <Card key={item._id} item={item}></Card>)
+          sortedObjects.slice(0,6).map(item => <Card key={item._id} item={item}></Card>)
         }
       </div>
     </div>

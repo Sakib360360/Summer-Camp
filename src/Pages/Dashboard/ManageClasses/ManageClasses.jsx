@@ -3,10 +3,13 @@ import Swal from 'sweetalert2';
 import useManageClasses from '../../../Hooks/useManageClasses';
 import { Helmet } from 'react-helmet-async';
 import { AuthContext } from '../../Providers/AuthProviders';
-import useAxios from '../../../Hooks/useAxios';
+import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 
 const ManageClasses = () => {
-    const [axiosInstance] = useAxios()
+    const [status, setStatus] = useState('pending')
+    const [enrolledClasses, setEnrolledClasses] = useState([])
+    const { user } = useContext(AuthContext)
+    const [axiosInstance] = useAxiosSecure()
     const [allClasses, refetch] = useManageClasses()
     const [textareaValue, setTextareaValue] = useState('');
     const [sendItem,setSendItem] = useState({})
@@ -61,6 +64,23 @@ const ManageClasses = () => {
 
 
 
+    useEffect(() => {
+        axiosInstance.get(`/enrolledClasses`)
+            .then(response => {
+                setEnrolledClasses(response.data)
+            })
+            .catch(error => console.log(error))
+    }, [])
+
+    // console.log(allClasses,enrolledClasses)
+    const matchingIds = enrolledClasses.filter(item => {
+        const selectedId = item.selectedId;
+        return allClasses.some(obj => obj.id === selectedId);
+      });
+      
+      const totalCount = matchingIds.length;
+      
+    //   console.log(totalCount);
 
 
 
@@ -85,6 +105,7 @@ const ManageClasses = () => {
                             <th>Instructor Email</th>
                             <th>Price</th>
                             <th>Available Seats</th>
+
                             <th>Status</th>
                             <th>Action</th>
                             <th>Action</th>
