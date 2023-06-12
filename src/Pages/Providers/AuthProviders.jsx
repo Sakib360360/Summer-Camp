@@ -13,8 +13,6 @@ const AuthProviders = ({children}) => {
     const [loading,setLoading] = useState(true)
     const [user,setUser] = useState(null)
     const [paymentItem,setPaymentItem] = useState({})
-    const [isAdmin,setIsAdmin] = useState(false)
-    const [isInstructor,setInstructor] = useState(false)
     const [handleUpdateData,setHandleUpdateData] = useState(null)
     const googleProvider = new GoogleAuthProvider()
 
@@ -79,10 +77,7 @@ const AuthProviders = ({children}) => {
         paymentItem,
         setHandleUpdateData,
         handleUpdateData,
-        setIsAdmin,
-        isAdmin,
-        setInstructor,
-        isInstructor
+        
 
 
     }

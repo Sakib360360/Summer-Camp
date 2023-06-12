@@ -49,11 +49,11 @@ const AddAClass = () => {
     };
     return (
         // TODO: button disabled when any field is not filled
-        <div className='mb-12'>
+        <div className='mb-12 '>
             <Helmet>
                 <title>Language-Camp|Add a Class</title>
             </Helmet>
-            <form onSubmit={handleSubmit(onSubmit)} className="max-w-md mx-auto mt-8">
+            <form onSubmit={handleSubmit(onSubmit)} className="max-w-md mx-auto border border-black p-8 rounded-xl mt-8">
                 <div className="mb-4">
                     <label htmlFor="className" className="block text-gray-700 font-bold mb-2">
                         Class Name

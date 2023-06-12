@@ -8,7 +8,7 @@ const Card = ({item}) => {
     const {className,seats,classImage,price,classInstructor} = item;
     // const [isAdmin,] = useAdmin()
     // const [isInstructor,] = useInstructor()
-    const {user,isAdmin,isInstructor} = useContext(AuthContext)
+    const {user} = useContext(AuthContext)
     const [axiosInstance] = useAxiosSecure()
     const [disabled,setDisabled] = useState(false)
     const location = useLocation()

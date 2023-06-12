@@ -94,7 +94,7 @@ const MyClasses = () => {
                                 <td><button className='' onClick={()=>handleUpdate(item)}>Update</button></td>
                                 <td>{item.status}</td>
                                 {/* TODO: onclick show more */}
-                                <td><button  onClick={() => feedbackShow(item.feedback)}><a href="#my_modal_8" className="btn" disabled={item.status === 'pending'}>See Feedback</a></button></td>
+                                <td><button  onClick={() => feedbackShow(item.feedback)}><a href="#my_modal_8" className="btn btn-sm btn-outline font-bold" disabled={item.status === 'pending' || item.status === 'approved'}>{item.status === 'pending' || item.status === 'approved' ? 'No Feedback':'See Feedback'}</a></button></td>
                             </tr>)
                         }
 
