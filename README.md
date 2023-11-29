@@ -1,34 +1,27 @@
 # This is a Language Club Summer Camp School Website
-## Features
-- This has full function to add as instructor
-- As an admin you can manage classes , approve or deny the request to add the classes.
-- As an instructor you can see who has taken your class
-- As an admin you can make a student as an instructor or as an admin.
-- This site has payment fucntionality 
+🚀 Key Features:
 
-# Packages and Technologies used
--   "@smastrom/react-rating": "^1.3.1",
--   react-stripe-js"
--   "@stripe/stripe-js": "^1.54.0",
--   "@tanstack/react-query": "^4.29.12",
--   "aos": "^3.0.0-beta.6",
--   "axios": "^1.4.0",
--   "firebase": "^9.22.1",
--   "framer-motion": "^10.12.16",
--   "localforage": "^1.10.0",
--   "match-sorter": "^6.3.1",
+MERN Stack Brilliance:
 
--   "react": "^18.2.0",
--    "react-dom": "^18.2.0",
--    "react-helmet-async": "^1.3.0",
--    "react-hook-form": "^7.44.3",
--   "react-icons": "^4.9.0",
--   "react-router-dom": "^6.12.0",
--   "react-ts-typewriter": "^0.1.8-b",
--   "recharts": "^2.6.2",
--   "sort-by": "^1.2.0",
--   "sweetalert2": "^11.7.11",
--   "swiper": "^9.3.2"
+MongoDB: A robust NoSQL database for efficient data storage.
+Express.js: Ensuring smooth server-side operations and API handling.
+React.js: Building a dynamic and responsive user interface for an engaging experience.
+Node.js: Powering the backend and facilitating server-side scripting.
+CRUD Operations:
+
+Dive into a user-friendly interface that allows for effortless Course Creation, Reading, Updating, and Deletion (CRUD). Instructors can easily manage course content, ensuring an up-to-date curriculum.
+Admin Panel:
+
+Experience the ease of overseeing the entire Language Camp operation through a fully functional admin panel. Admins have complete control, from managing courses and instructors .
+Instructor Panel:
+
+Empower instructors with a dedicated panel where they can efficiently create and manage course content.
+Student Dashboard:
+
+Students enjoy a personalized dashboard, offering a user-centric experience. Enroll in courses, pay for the liked courses.
+Firebase Authentication:
+
+Elevate security standards with Firebase authentication, ensuring a seamless and secure sign-up and login process for both instructors and students.
 
 
 # Live site: https://language-club-summer-camp.web.app/
